@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function Estimate() {
@@ -9,6 +9,7 @@ export default function Estimate() {
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
+    const contactRef = useRef(null); // Ref for the contact section
 
     const handleOnClick = (index) => {
         setActiveIndex(index);
@@ -24,13 +25,11 @@ export default function Estimate() {
         try {
             const res = await fetch('http://localhost:5000/api/postss/regions');
             const data = await res.json();
-            
-            setRegions(data); 
+            setRegions(data);
         } catch (error) {
             console.error("Failed to fetch regions:", error);
         }
     };
-    
 
     const fetchPosts = async (regionIndex, keyword) => {
         setLoading(true);
@@ -57,6 +56,13 @@ export default function Estimate() {
             fetchPosts(activeIndex, searchKeyword);
         }
     }, [activeIndex, currentPage, searchKeyword]);
+
+    const scrollToContact = (company) => {
+        localStorage.setItem("selectedCompany", company); // Store company in local storage
+        if (contactRef.current) {
+            contactRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    };
 
     return (
         <>
@@ -109,6 +115,7 @@ export default function Estimate() {
                                                                 <th>Title</th>
                                                                 <th>Description</th>
                                                                 <th>Conditions</th>
+                                                                <th>Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -118,11 +125,14 @@ export default function Estimate() {
                                                                         <td>{post.conditionsEtAvantages}</td>
                                                                         <td>{post.descriptionDuPoste}</td>
                                                                         <td>{post.presentationDeLEntreprise}</td>
+                                                                        <td>
+                                                                            <button style={{color:'white',backgroundColor:'#0055FF',borderRadius:'5px'}} onClick={() => scrollToContact(post.agence)}>Postuler</button>
+                                                                        </td>
                                                                     </tr>
                                                                 ))
                                                             ) : (
                                                                 <tr>
-                                                                    <td colSpan="3">No posts available</td>
+                                                                    <td colSpan="4">No posts available</td>
                                                                 </tr>
                                                             )}
                                                         </tbody>
@@ -156,6 +166,8 @@ export default function Estimate() {
                     <img src="/assets/img/services/h4_services_shape.png" alt="" data-aos="fade-left" data-aos-delay={200} />
                 </div>
             </section>
+
+           
         </>
     );
 }

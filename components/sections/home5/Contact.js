@@ -1,9 +1,46 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import axios from 'axios';
 import StepWizard from 'react-step-wizard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 export default function Contact() {
+  const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  
+  const uploadPdf = async (file) => {
+    
+    const formData = new FormData();
+    formData.append('file', file);
+
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await axios.post('http://localhost:4000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        responseType: 'blob', // important for file download
+      });
+
+      // Create a link element to download the file
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'processed.pdf');
+      document.body.appendChild(link);
+      link.click();
+
+      setLoading(false);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      setError('Failed to upload file.');
+      setLoading(false);
+    }
+  };
+  const company = localStorage.getItem('selectedCompany');
   const [formData, setFormData] = useState({
     title: '',
     lastName: '',
@@ -11,11 +48,18 @@ export default function Contact() {
     phone: '',
     email: '',
     comments: '',
+   company:company,
     cvUpload: null,
     education: [{ degree: '', institution: '', year: '' }],
     experience: [{ jobTitle: '', company: '', duration: '' }],
   });
-
+  const handleFileChangeUpload = (e) => {
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      uploadPdf(selectedFile);
+    }
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -23,6 +67,11 @@ export default function Contact() {
 
   const handleFileChange = (e) => {
     setFormData({ ...formData, cvUpload: e.target.files[0] });
+    const selectedFile = e.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+      uploadPdf(selectedFile);
+    }
   };
 
   const handleEducationChange = (index, e) => {
@@ -52,7 +101,7 @@ export default function Contact() {
       experience: [...formData.experience, { jobTitle: '', company: '', duration: '' }],
     });
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -118,7 +167,7 @@ export default function Contact() {
                     prevStep={() => {}}
                     nextStep={() => {}}
                   />
-                  <Step4 handleFileChange={handleFileChange} />
+                  <Step4 handleFileChange={handleFileChange} handleFileChangeUpload={handleFileChangeUpload}/>
                 </StepWizard>
                 
               </form>
@@ -129,6 +178,7 @@ export default function Contact() {
       <div className="contact-shape">
         <img src="/assets/img/images/contact_shape.png" alt="" />
       </div>
+      <ToastContainer/>
     </section>
   );
 }
@@ -249,7 +299,7 @@ const Step3 = ({ experience, handleExperienceChange, addExperience, prevStep, ne
   </div>
 );
 
-const Step4 = ({ handleFileChange }) => (
+const Step4 = ({ handleFileChange ,handleFileChangeUpload}) => (
   <div>
     <h3>Étape 4: Télécharger CV</h3>
     <div className="form-grp">
@@ -258,11 +308,16 @@ const Step4 = ({ handleFileChange }) => (
         type="file"
         id="cvUpload"
         name="cvUpload"
-        accept=".pdf,.doc,.docx"
-        onChange={handleFileChange}
+        accept=".pdf"
+        onChange={(event) => {
+          handleFileChange(event);
+          handleFileChangeUpload(event);
+        }}
+    
       />
+      
     </div>
     <button style={{width:'auto'}}  type="submit">Soumettre</button>
-    <ToastContainer/>
+    
   </div>
 );
