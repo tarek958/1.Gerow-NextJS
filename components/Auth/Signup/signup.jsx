@@ -24,9 +24,24 @@ function Signup() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const { firstName, lastName, email, telephone, password } = formData;
+
+    // Basic client-side validation
+    if (!firstName || !lastName || !email || !telephone || !password) {
+      toast.error('Tous les champs sont requis.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error('Format d\'email invalide.');
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:5000/api/users/signup', formData);
-      
+
       if (response.status === 201) { 
         toast.success('Utilisateur créé avec succès !');
         setTimeout(() => {
@@ -34,7 +49,11 @@ function Signup() {
         }, 1000);
       }
     } catch (err) {
-      setError('Échec de l’inscription. Veuillez réessayer.');
+      if (err.response && err.response.data && err.response.data.message) {
+        toast.error(err.response.data.message); // Show backend error message
+      } else {
+        toast.error('Échec de l’inscription. Veuillez réessayer.');
+      }
     }
   };
 

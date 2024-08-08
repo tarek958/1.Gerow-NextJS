@@ -14,10 +14,19 @@ function Signin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic client-side validation
     if (!email || !password) {
-      setError("L'email et le mot de passe sont requis.");
+      toast.error("L'email et le mot de passe sont requis.");
       return;
     }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Format d'email invalide.");
+      return;
+    }
+
     try {
       const response = await axios.post("http://localhost:5000/api/users/signin", {
         email,
@@ -26,14 +35,18 @@ function Signin() {
 
       if (response.status === 200) {
         toast.success('Connexion réussie');
-        localStorage.setItem('token', response.data.token); // Enregistrer le token dans localStorage
+        localStorage.setItem('token', response.data.token); // Save token to localStorage
         setTimeout(() => {
           router.push('/');
         }, 500);
       }
     } catch (error) {
-      console.error(`Échec :`, error);
-      toast.error(`Échec de la connexion. Veuillez réessayer.`);
+      console.error('Échec :', error);
+      if (error.response && error.response.data && error.response.data.message) {
+        toast.error(error.response.data.message); // Show backend error message
+      } else {
+        toast.error('Échec de la connexion. Veuillez réessayer.');
+      }
     }
   };
 

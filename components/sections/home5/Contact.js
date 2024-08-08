@@ -7,70 +7,87 @@ export default function Contact() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
-  const uploadPdf = async (file) => {
-    
-    const formData = new FormData();
-    formData.append('file', file);
 
-
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await axios.post('http://localhost:4000/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-        responseType: 'blob', // important for file download
-      });
-
-      // Create a link element to download the file
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'processed.pdf');
-      document.body.appendChild(link);
-      link.click();
-
-      setLoading(false);
-    } catch (error) {
-      console.error('Error uploading file:', error);
-      setError('Failed to upload file.');
-      setLoading(false);
-    }
-  };
   const company = localStorage.getItem('selectedCompany');
+
   const [formData, setFormData] = useState({
     title: '',
     lastName: '',
     firstName: '',
+    filename: '', // This will be updated with the generated filename
     phone: '',
     email: '',
     comments: '',
-   company:company,
+    company: company,
     cvUpload: null,
     education: [{ degree: '', institution: '', year: '' }],
     experience: [{ jobTitle: '', company: '', duration: '' }],
   });
+
+  const generateFilename = (file) => {
+    const timestamp = Date.now(); // Current timestamp
+    const fileExtension = file.name.split('.').pop(); // Extract the file extension
+    const generatedFilename = `${timestamp}.${fileExtension}`; // Generate the filename
+    return generatedFilename;
+  };
+
+  const uploadPdf = async (file, generatedFilename) => {
+    const formData = new FormData();
+    formData.append('cvUpload', file);
+    formData.append('filename', generatedFilename);
+
+    try {
+      const response = await fetch('http://148.113.194.169:5000/upload_cv', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = generatedFilename; // Use the same generated filename for download
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      } else {
+        console.error('Upload failed');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleFileChangeUpload = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
+      const generatedFilename = generateFilename(selectedFile);
       setFile(selectedFile);
-      uploadPdf(selectedFile);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        filename: generatedFilename, // Update the filename in the formData state
+      }));
+      uploadPdf(selectedFile, generatedFilename);
     }
   };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleFileChange = (e) => {
-    setFormData({ ...formData, cvUpload: e.target.files[0] });
     const selectedFile = e.target.files[0];
     if (selectedFile) {
+      const generatedFilename = generateFilename(selectedFile);
       setFile(selectedFile);
-      uploadPdf(selectedFile);
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        cvUpload: selectedFile,
+        filename: generatedFilename, // Update the filename in the formData state
+      }));
+      uploadPdf(selectedFile, generatedFilename);
     }
   };
 
@@ -101,7 +118,7 @@ export default function Contact() {
       experience: [...formData.experience, { jobTitle: '', company: '', duration: '' }],
     });
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
