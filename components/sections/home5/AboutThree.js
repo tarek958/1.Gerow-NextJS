@@ -25,7 +25,7 @@ export default function AboutTwo() {
                                 <p>La réussite d’une mission de recrutement se juge dans le temps. La prise de poste est une première étape importante, l’intégration au sein de l’entreprise en est une seconde.</p>
                                 <p>À ce titre nous assurons un suivi auprès de tous nos candidats recrutés afin de faciliter cette phase d’intégration et d’assurer la réussite de notre mission de recrutement.</p>
                                 <div className="fa-3x ">
-                                <Link href="/about" className="btn transparent-btn">décrochez le job de vos rêves</Link>
+                                <Link href="/index-5#offres" className="btn transparent-btn">décrochez le job de vos rêves</Link>
                                 
                                 </div>
                                 
@@ -33,7 +33,7 @@ export default function AboutTwo() {
                         </div>
                     </div>
                 </div>
-                <div className="about-shape-wrap">
+                <div className="about-shape-wrap"  id="offres">
                     <img src="/assets/img/images/about_shape01.png" alt="" />
                     <img src="/assets/img/images/about_shape02.png" alt="" />
                 </div>

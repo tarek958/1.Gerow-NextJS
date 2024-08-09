@@ -23,10 +23,11 @@ export default function Banner() {
                                         </svg>
                                     </span> trouvez le poste qui vous correspond.</h2>
                                 <p data-aos="fade-right" data-aos-delay={300}>Atlantis Conseil valorise le rôle stratégique des ressources humaines dans la croissance des entreprises en offrant des solutions adaptées aux besoins spécifiques du marché.</p>
-                                <Link href="#" className="btn btn-three" data-aos="fade-right" data-aos-delay={600}>Notre Service</Link>
+                                <Link href="/index-4#recruterCandidat" className="btn btn-three" data-aos="fade-right" data-aos-delay={600}>Commencer</Link>
                             </div>
                         </div>
                     </div>
+                        <div  id="recruterCandidat" ></div>
                 </div>
             </section>
         </>

@@ -35,7 +35,7 @@ export default function Overview() {
                                     <li>Et le cas échéant orienter vers les partenaires et structures compétentes.</li>
                                 </ul>
                                 <div className="view-all-btn text-start mb-30">
-                                <Link href="/project-details" className="btn btn-three">Présentez-nous votre projet</Link>
+                                <Link href="/index-4#projet" className="btn btn-three">Présentez-nous votre projet</Link>
                         <div  id="ref"></div>
                             </div>
                             </div>

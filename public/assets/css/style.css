@@ -9849,3 +9849,12 @@ label {
         transform: rotate(-360deg);
     }
 }
+
+.profile-icon i {
+    font-size: 1.8em; /* Adjust the size as needed */
+    color: #1957fa;
+}
+
+.profile-icon a:hover i {
+    color: #02194a;
+}

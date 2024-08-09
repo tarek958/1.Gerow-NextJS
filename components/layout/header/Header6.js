@@ -7,11 +7,11 @@ import { useRouter } from "next/router";
 export default function Header6({ scroll, isMobileMenu, handleMobileMenu, isSearch, handleSearch, isOffcanvus, handleOffcanvus }) {
     const token = localStorage.getItem('token');
     const [activeLink, setActiveLink] = useState('/');
-      const router = useRouter();
-  
-      useEffect(() => {
-          setActiveLink(router.pathname);
-      }, [router.pathname]);
+    const router = useRouter();
+
+    useEffect(() => {
+        setActiveLink(router.pathname);
+    }, [router.pathname]);
     return (
         <>
             <div id="header-fixed-height" className={scroll ? "active-height" : ""} />
@@ -73,7 +73,7 @@ export default function Header6({ scroll, isMobileMenu, handleMobileMenu, isSear
                                                 <li className="menu-item-has-children">
                                                     <Link href="/index-5">Candidats</Link>
                                                     <ul className="sub-menu">
-                                                    <li className="menu-item-has-children">
+                                                        <li className="menu-item-has-children">
                                                             <li><Link href="/index-5#offres">Offres d’emploi</Link></li>
                                                             <li><Link href="/index-5#temoignage">Témoignages</Link></li>
                                                             <li><Link href="/index-5#candidature">Candidature&nbsp;Spontanée</Link></li>
@@ -84,34 +84,36 @@ export default function Header6({ scroll, isMobileMenu, handleMobileMenu, isSear
                                                 <li className={activeLink === '/contact' ? 'active' : ''}><Link href="/contact">Contact</Link></li>
                                             </ul>
                                         </div>
-                                        {/* <div className="header-action">
-                                            <ul className="list-wrap">
-                                                <li className="offcanvas-menu offcanvas-menu-two" onClick={handleOffcanvus}>
-                                                    <Link href="#" className="menu-tigger">
-                                                        <span />
-                                                        <span />
-                                                        <span />
-                                                    </Link>
+                                        <div className="navbar-wrap main-menu d-none d-lg-flex">
+                                            <ul className="">
+                                                <li className={`menu-item-has-children ${activeLink === '/index-5' ? 'active' : ''}`}>
+                                                    <Link href="/index-5"><i className="fas fa-user"></i></Link>
+                                                    <ul className="sub-menu">
+                                                        <li className="menu-item-has-children">
+                                                            <li></li>
+                                                            <li><div className="">
+                                                                {token ? (
+                                                                    <>
+                                                                        <Link href="/profile">Profile</Link>
+                                                                        <Link
+                                                                            className=""
+                                                                            onClick={() => {
+                                                                                localStorage.removeItem('token');
+                                                                                window.location.href = '/';
+                                                                            }}
+                                                                        >
+                                                                            Se déconnecter
+                                                                        </Link>
+                                                                    </>
+                                                                ) : (
+                                                                    <Link href="/signin">Se connecter
+                                                                    </Link>
+                                                                )}
+                                                            </div></li>
+                                                        </li>
+                                                    </ul>
                                                 </li>
                                             </ul>
-                                        </div> */}
-
-                                        <div className="header-action ps-3">
-                                            {token ? (
-                                                <button
-                                                    className="btn btn-two"
-                                                    onClick={() => {
-                                                        localStorage.removeItem('token');
-                                                        window.location.href = '/';
-                                                    }}
-                                                >
-                                                    Se déconnecter
-                                                </button>
-                                            ) : (
-                                                <Link href="/signin">
-                                                    <button className="btn btn-two">Se connecter</button>
-                                                </Link>
-                                            )}
                                         </div>
                                     </nav>
                                 </div>

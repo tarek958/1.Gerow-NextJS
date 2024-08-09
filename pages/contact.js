@@ -63,10 +63,10 @@ export default function Contact() {
 
                 </div>
                 <div className="footer-info">
-                  <ul className="list-wrap">
+                  <ul className="list-wrap mt-2">
                     <li>
                       <div className="icon">
-                        <i className="flaticon-pin" />
+                        <i className="flaticon-pin" style={{color:"red"}}/>
                       </div>
                       <div className="content">
                         <p>IMMEUBLE PALAZZO
@@ -76,11 +76,13 @@ export default function Contact() {
                     </li>
                     <li>
                       <div className="icon">
-                        <i className="flaticon-phone-call" />
+                        <i className="flaticon-phone-call" style={{color:"green"}}/>
                       </div>
                       <div className="content">
-                        <Link href="tel:0489977508">04 89 97 75 08</Link>
-                      </div>
+                        <Link href="tel:0489977508" style={{ color: '#96a1b7', textDecoration: 'none' }} onMouseEnter={(e) => e.target.style.color = 'blue'} onMouseLeave={(e) => e.target.style.color = 'inherit'}>
+                          04 89 97 75 08
+                        </Link>
+                                              </div>
                     </li>
                   </ul></div>
               </div>

@@ -28,7 +28,7 @@ export default function About() {
                                 <p>Atlantis Conseil vous aide à mettre le management et les ressources humaines au cœur des processus qui garantissent la performance durable de l’entreprise et la qualité des produits et des services.</p>
                                 <p>Nous mettons notre expertise à votre service dans de nombreux domaines des ressources humaines tels que la réalisation d’un audit social, de bilans de compétences et d’évaluations de potentiels. Nous pouvons également intervenir pour de la conduite du changement, de la gestion de conflits ainsi que pour des actions de team building.</p>
                                 <div className="view-all-btn text-start mb-30">
-                                <Link href="/project-details" className="btn btn-three">Parlons de votre projet</Link>
+                                <Link href="/index-4#projet" className="btn btn-three">Parlons de votre projet</Link>
                             </div>
                             <div  id="recrutement"></div>
                             </div>

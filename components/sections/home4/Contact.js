@@ -135,6 +135,7 @@ export default function Contact() {
         <div className="contact-shape">
           <img src="/assets/img/images/contact_shape.png" alt="" />
         </div>
+        <div id="blog2"></div>
       </section>
     </>
   )

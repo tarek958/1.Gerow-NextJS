@@ -88,7 +88,7 @@ export default function Testimonial() {
                                             </div>
                                             <div className="avatar-info">
                                                 <h2 className="title">Mr.GREGORY</h2>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -105,14 +105,14 @@ export default function Testimonial() {
                                             <i className="fas fa-star" />
                                         </div>
                                         <p>“Excellent contact, très professionnel, à l’écoute, motivé et très motivant ?
-Un grand Merci à Lucas Genovese</p>
+                                            Un grand Merci à Lucas Genovese</p>
                                         <div className="testimonial-avatar">
                                             <div className="avatar-thumb">
                                                 <img src="/assets/img/images/testi_avatar01.png" alt="" />
                                             </div>
                                             <div className="avatar-info">
                                                 <h2 className="title">Mme.CHRISTELLE</h2>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -129,16 +129,16 @@ Un grand Merci à Lucas Genovese</p>
                                             <i className="fas fa-star" />
                                         </div>
                                         <p>“Iliace, je t’envoie ce petit message de remerciement quant à notre collaboration professionnelle.
-Il y a 8 mois de cela, tu m’as contacté afin de me proposer un poste de commercial dans une belle structure.
-Ton discernement et ton professionnalisme ont créer le lien entre les deux parties et aujourd’hui, je suis validé dans mon poste.
-Encore un grand merci à toi et bonne continuation.</p>
+                                            Il y a 8 mois de cela, tu m’as contacté afin de me proposer un poste de commercial dans une belle structure.
+                                            Ton discernement et ton professionnalisme ont créer le lien entre les deux parties et aujourd’hui, je suis validé dans mon poste.
+                                            Encore un grand merci à toi et bonne continuation.</p>
                                         <div className="testimonial-avatar">
                                             <div className="avatar-thumb">
                                                 <img src="/assets/img/images/testi_avatar02.png" alt="" />
                                             </div>
                                             <div className="avatar-info">
                                                 <h2 className="title">Mr.NICOLAS</h2>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -161,7 +161,7 @@ Encore un grand merci à toi et bonne continuation.</p>
                                             </div>
                                             <div className="avatar-info">
                                                 <h2 className="title">Mme.CARMEN</h2>
-                                                
+
                                             </div>
                                         </div>
                                     </div>
@@ -178,7 +178,7 @@ Encore un grand merci à toi et bonne continuation.</p>
                         </div>
                     </div>
                 </div>
-                    <div id="candidature"></div>
+                <div id="candidature"></div>
             </section>
         </>
     )

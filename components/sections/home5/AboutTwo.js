@@ -26,8 +26,7 @@ export default function AboutTwo() {
                                 <p>Le parcours entre votre intention et la signature d’un contrat avec une entreprise est subtil et repose sur une multitude de critères. Parmi eux, vos objectifs et ceux de l’entreprise. Notre métier est de faire correspondre les deux pour vous aider à trouver le job de vos rêves et permettre à une entreprise de trouver en vous sa nouvelle recrue idéale.</p>
                                 
                                 <div className="fa-3x ">
-                                <Link href="/about" className="btn transparent-btn">Consulter les offres</Link>
-                                <Link href="/about" className="btn transparent-btn">Candidature spontanée</Link>
+                                <Link href="/index-5#candidature" className="btn transparent-btn">Candidature spontanée</Link>
                                 </div>
                                 
                             </div>

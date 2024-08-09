@@ -74,7 +74,7 @@ export default function Estimate() {
                         <h2 className="title tg-element-title">OFFRES D’EMPLOI</h2>
                     </div>
                     <div className="view-all-btn text-center fa-2x mb-30">
-                        <Link href="/project-details" className="btn btn-three">VOIR TOUTES NOS OFFRES</Link>
+                        <Link href="/offres" className="btn btn-three">VOIR TOUTES NOS OFFRES</Link>
                     </div>
                     <div className="row align-items-center">
                         <div className="col-lg-6">

@@ -21,7 +21,7 @@ export default function Team() {
                                     <img src="/assets/img/team/logik.png" width="227" height="100" alt="" />
                                 </div>
                                 <div className="team-content-five">
-                                    <h2 className="title"><Link href="/team-details">Logik</Link></h2>
+                                    <h2 className="title"><Link href="https://www.logik.pro/">Logik</Link></h2>
                                     {/* <span>Atlantis Conseil a su répondre de façon efficace et rapide à nos différentes demandes. Pour preuve nous avons un certain nombre de collaborateurs dans nos bureaux et nos effectifs actuels qui ont été recrutés par leurs soins. Atlantis Conseil nous permet d’éviter les « erreurs de casting », notamment grâce au travail de fond réalisé qui permet de recruter le bon profil.</span> */}
                                     <span>
 
@@ -35,7 +35,7 @@ export default function Team() {
                                     <img src="/assets/img/team/leasys.png" width="302" height="98" alt="" />
                                 </div>
                                 <div className="team-content-five">
-                                    <h2 className="title"><Link href="/team-details">LEASYS</Link></h2>
+                                    <h2 className="title"><Link href="https://www.infoleasys.fr/">LEASYS</Link></h2>
                                     <span>Nous avons étés en confiance avec le consultant d’Atlantis Conseil, la méthode nous à convenue et rassurée. Nous avons reçu plusieurs bons CV en quelques jours sans avoir à nous occuper de quoi que ce soit. Le résultat est là, notre nouvelle collaboratrice convient parfaitement et s’intègre parfaitement.</span>
                                     
                                 </div>

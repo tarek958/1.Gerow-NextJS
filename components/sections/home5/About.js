@@ -21,7 +21,7 @@ export default function About() {
                                 <p>Notre mission consiste à trouver le bon « matching » entre une entreprise et un candidat. Seul ce résultat apportera une satisfaction globale et permettra un développement de l’entreprise au travers de l’épanouissement de ses collaborateurs.</p>
                                 <p>Notre rôle consiste donc à bien comprendre les besoins et valeurs de l’entreprise d’une part. D’autre part, à bien identifier votre projet, vos souhaits et vos compétences. Cette analyse préalable nous permet de vous aider à trouver le job de vos rêves.</p>
                                 <div className="view-all-btn text-start  fa-3x mb-30">
-                                <Link href="/project-details" className="btn btn-three">Trouvez le job de vos rêves</Link>
+                                <Link href="/index-5#offres" className="btn btn-three">Trouvez le job de vos rêves</Link>
                             </div>
                             </div>
                         </div>

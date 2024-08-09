@@ -20,9 +20,10 @@ export default function SignIn() {
 
   return (
     
-      <div>
+    <Layout headerStyle={2} footerStyle={3}>
+
         <AuthForm type="signin" />
-      </div>
+    </Layout>
     
   );
 }

@@ -15,7 +15,7 @@ export default function Request() {
                             <div className="request-content-right">
                                 
                                 <div className="request-btn">
-                                    <Link href="/contact" className="btn">Déposer une candidature spontanée</Link>
+                                    <Link href="/index-5#candidature" className="btn">Déposer une candidature spontanée</Link>
                                 </div>
                             </div>
                         </div>

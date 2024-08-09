@@ -44,11 +44,11 @@ export default function Blog() {
                         <div className="col-lg-4 col-md-6 col-sm-10">
                             <div className="blog-post-item-two">
                                 <div className="blog-post-thumb-two">
-                                    <Link href="#"><img src="/assets/img/blog/h3_blog_img03.jpg" alt="" /></Link>
+                                    <Link href="/blog3"><img src="/assets/img/blog/h3_blog_img03.jpg" alt="" /></Link>
                                    
                                 </div>
                                 <div className="blog-post-content-two">
-                                    <h2 className="title"><Link href="#">Comment décrocher le job de ses rêves !</Link></h2>
+                                    <h2 className="title"><Link href="/blog3">Comment décrocher le job de ses rêves !</Link></h2>
                                     <p>COMMENT DECROCHER LE JOB DE SES RÊVES ! Nous vivons une époque où le bien-être et l'épanouissement personnel sont des priorités. Il est aujourd’hui essentiel, pour être heureux, d'exercer un métier qui [...]</p>
                                     
                                 </div>
