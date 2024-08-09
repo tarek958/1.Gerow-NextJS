@@ -120,23 +120,29 @@ export default function Estimate() {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {Array.isArray(posts) && posts.length > 0 ? (
-                                                                posts.map((post, index) => (
-                                                                    <tr key={index}>
-                                                                        <td>{post.conditionsEtAvantages}</td>
-                                                                        <td>{post.descriptionDuPoste}</td>
-                                                                        <td>{post.presentationDeLEntreprise}</td>
-                                                                        <td>
-                                                                            <button style={{color:'white',backgroundColor:'#0055FF',borderRadius:'5px'}} onClick={() => scrollToContact(post.agence)}>Postuler</button>
-                                                                        </td>
-                                                                    </tr>
-                                                                ))
-                                                            ) : (
-                                                                <tr>
-                                                                    <td colSpan="4">No posts available</td>
-                                                                </tr>
-                                                            )}
-                                                        </tbody>
+    {Array.isArray(posts) && posts.length > 0 ? (
+        posts.map((post, index) => (
+            <tr key={index}>
+                <td>{post.conditionsEtAvantages}</td>
+                <td>{post.descriptionDuPoste}</td>
+                <td>{post.presentationDeLEntreprise}</td>
+                <td>
+                    <Link 
+  href={`/${post._id}`} 
+  style={{ color: 'white', backgroundColor: '#0055FF', borderRadius: '5px', padding: '5px 10px', textDecoration: 'none' }}>
+    Voir Détails
+</Link>
+
+                </td>
+            </tr>
+        ))
+    ) : (
+        <tr>
+            <td colSpan="4">No posts available</td>
+        </tr>
+    )}
+</tbody>
+
                                                     </table>
                                                 )}
                                                 <div className="pagination">

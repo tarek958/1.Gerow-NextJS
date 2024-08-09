@@ -3,13 +3,49 @@ import axios from 'axios';
 import StepWizard from 'react-step-wizard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { jwtDecode } from "jwt-decode";
 export default function Contact() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-
+  const [user, setUser] = useState('');
   const company = localStorage.getItem('selectedCompany');
+    const fetchUserData = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) {
+          setError("No token found");
+          window.location.href = "/signin";
+          setLoading(false);
+          return;
+        }
 
+        const decoded = jwtDecode(token); // jwtDecode should be used as default import
+        const userId = decoded.id;
+
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const response = await axios.get(
+          `http://localhost:5000/api/users/${userId}`,
+          config
+        );
+        setUser(response.data);
+      } catch (err) {
+        setError("Failed to fetch user data");
+      } finally {
+        setLoading(false);
+      }
+    };
+  useEffect(() => {
+
+    fetchUserData();
+  }, []);
+
+  
   const [formData, setFormData] = useState({
     title: '',
     lastName: '',
@@ -23,7 +59,7 @@ export default function Contact() {
     education: [{ degree: '', institution: '', year: '' }],
     experience: [{ jobTitle: '', company: '', duration: '' }],
   });
-
+  
   const generateFilename = (file) => {
     const timestamp = Date.now(); // Current timestamp
     const fileExtension = file.name.split('.').pop(); // Extract the file extension
@@ -37,7 +73,7 @@ export default function Contact() {
     formData.append('filename', generatedFilename);
 
     try {
-      const response = await fetch('http://148.113.194.169:5000/upload_cv', {
+      const response = await fetch('http://148.113.194.169:4000/upload_cv', {
         method: 'POST',
         body: formData,
       });
@@ -58,7 +94,14 @@ export default function Contact() {
       console.error('Error:', error);
     }
   };
-
+  const handleInputChangeText = (e) => {
+    if (user) {
+      setUser({
+        ...user,
+        [e.target.name]: e.target.value,
+      });
+    }
+  };
   const handleFileChangeUpload = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
@@ -72,10 +115,14 @@ export default function Contact() {
     }
   };
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
+  
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -168,7 +215,9 @@ export default function Contact() {
                 <StepWizard>
                   <Step1
                     handleInputChange={handleInputChange}
+                    handleInputChangeText={handleInputChangeText}
                     nextStep={() => {}}
+                    user={user}
                   />
                   <Step2
                     education={formData.education}
@@ -200,7 +249,8 @@ export default function Contact() {
   );
 }
 
-const Step1 = ({ handleInputChange, nextStep }) => (
+const Step1 = ({ handleInputChange, nextStep ,user, handleInputChangeText }) => {
+  return(
   <div>
     <h3>Étape 1: Informations personnelles</h3>
     <div className="form-grp">
@@ -213,19 +263,19 @@ const Step1 = ({ handleInputChange, nextStep }) => (
     </div>
     <div className="form-grp">
       <label htmlFor="lastName">Nom</label>
-      <input type="text" id="lastName" name="lastName" placeholder="Nom *" onChange={handleInputChange} required />
+      <input type="text" id="lastName" name="lastName"  value={user && user.lastName} onChange={(event) =>{handleInputChangeText(event); handleInputChange(event);}} required />
     </div>
     <div className="form-grp">
       <label htmlFor="firstName">Prénom</label>
-      <input type="text" id="firstName" name="firstName" placeholder="Prénom *" onChange={handleInputChange} required />
+      <input type="text" id="firstName" name="firstName" placeholder="Prénom *" value={user && user.firstName} onChange={handleInputChange} required />
     </div>
     <div className="form-grp">
       <label htmlFor="phone">Portable</label>
-      <input type="tel" id="phone" name="phone" placeholder="Portable *" onChange={handleInputChange} required />
+      <input type="tel" id="phone" name="phone" placeholder="Portable *" value={user && user.telephone} onChange={handleInputChange} required />
     </div>
     <div className="form-grp">
       <label htmlFor="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Email *" onChange={handleInputChange} required />
+      <input type="email" id="email" name="email" placeholder="Email *" value={user && user.email} onChange={handleInputChange} required />
     </div>
     <div className="form-grp">
       <label htmlFor="comments">Comments</label>
@@ -233,7 +283,8 @@ const Step1 = ({ handleInputChange, nextStep }) => (
     </div>
     <button type="button" style={{width:'auto', marginBottom:'5px'}}  onClick={nextStep}>Next</button>
   </div>
-);
+  )
+  };
 
 
 const Step2 = ({ education, handleEducationChange, addEducation, prevStep, nextStep }) => (
