@@ -51,14 +51,13 @@ function Signin() {
   };
 
   return (
-    <MDBContainer fluid className="p-3 d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+    <MDBContainer fluid className="p-3 d-flex justify-content-center align-items-center signinContainer" style={{ height: '100vh' }}>
       <MDBRow className='d-flex justify-content-center'>
-        <MDBCol col='8' md='6' className='d-flex justify-content-center'>
+        <MDBCol col='8' md='6' className='d-flex justify-content-center signinImage'>
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Image de téléphone" />
         </MDBCol>
-
         <MDBCol col='2' md='4'>
-          <MDBCol col='2' md='40' className="p-3 my-3 d-flex justify-content-center align-items-center">
+          <MDBCol col='2' md='40' className="p-3 my-3 d-flex justify-content-center align-items-center signinForm">
             <img src="https://www.atlantis-conseil.fr/j9Ch0H/uploads/2020/05/AtlantisConseil-Logo-V2-170-1.png" alt="Logo" className="img-fluid" style={{ maxWidth: '150px' }} />
           </MDBCol>
 
@@ -84,13 +83,14 @@ function Signin() {
 
             {error && <div className="text-danger mb-3">{error}</div>}
 
-            <div className="d-flex justify-content-between mx-4 mb-4">
+            {/* <div className="d-flex justify-content-between mx-4 mb-4">
               <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Se souvenir de moi' />
               <a href="!#">Mot de passe oublié ?</a>
-            </div>
+            </div> */}
 
-            <button className="btn btn-primary mb-4 w-20" type="submit">Se connecter</button>
-            <div className="text-center mt-4">
+            <div className="btn-center">
+                <button className="btn btn-primary mb-4 w-20" type="submit">Se connecter</button>
+            </div>            <div className="text-center mt-4">
               <p>Vous n'avez pas de compte ? <Link href="/signup">S'inscrire</Link></p>
             </div>
           </form>

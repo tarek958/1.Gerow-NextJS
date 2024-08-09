@@ -68,10 +68,10 @@ export default function Features() {
                         </div>
                     </div>
 
-                    <div className="d-flex justify-content-between align-items-center mb-30">
+                    <div className="d-flex justify-content-between flex-wrap align-items-center mb-30">
                         <div className="d-column gap-3">
                             <p className="mb-0">Vous souhaitez plus de précisions ?</p>
-                            <p className="mb-0">Vous avez des questions ?</p>
+                            <p className="">Vous avez des questions ?</p>
                         </div>
                         <div className="view-all-btn">
                             <Link href="/index-4#projet" className="btn btn-three">Parlons de votre projet </Link>

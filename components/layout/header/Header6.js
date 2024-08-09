@@ -88,7 +88,7 @@ export default function Header6({ scroll, isMobileMenu, handleMobileMenu, isSear
                                             <ul className="">
                                                 <li className={`menu-item-has-children ${activeLink === '/index-5' ? 'active' : ''}`}>
                                                     <Link href="/index-5"><i className="fas fa-user"></i></Link>
-                                                    <ul className="sub-menu">
+                                                    <ul className="sub-menu2">
                                                         <li className="menu-item-has-children">
                                                             <li></li>
                                                             <li><div className="">

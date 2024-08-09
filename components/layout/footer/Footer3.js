@@ -37,7 +37,7 @@ export default function Footer3() {
                                             <ul className="list-wrap">
                                                 <li><Link href="/">Accueil</Link></li>
                                                 <li><Link href="/index-4">Entreprises</Link></li>
-                                                <li><Link href="/index-5">Candidates</Link></li>
+                                                <li><Link href="/index-5">Candidats</Link></li>
                                                 <li><Link href="/blog">Blog</Link></li>
                                                 <li><Link href="/contact">Contacts</Link></li>
                                             </ul>

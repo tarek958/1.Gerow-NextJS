@@ -75,7 +75,7 @@ export default function Contact() {
                       </div>
                     </li>
                     <li>
-                      <div className="icon">
+                      <div className="icon mb-3">
                         <i className="flaticon-phone-call" style={{color:"green"}}/>
                       </div>
                       <div className="content">

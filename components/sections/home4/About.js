@@ -1,3 +1,4 @@
+import VideoPopup from "@/components/elements/PopupVideo"
 import Link from "next/link"
 
 export default function About() {
@@ -7,11 +8,14 @@ export default function About() {
                 <div className="container">
                     <div className="row align-items-center justify-content-center">
                         <div className="col-lg-6 col-md-10">
-                            <div className="about-img-six">
-                                <div className="col-lg-6 col-md-10">
-                                    <iframe height="400" width="600" src="https://www.youtube.com/embed/0ouwqz577kc" title="Comment recruter le candidat idéal ?" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                                </div></div>
-
+                            <div className="pd-inner-wrap">
+                                <div className="col-59">
+                                    <div className="thumb">
+                                        <img src="/assets/img/project/project_details01.jpg" alt="" />
+                                        <VideoPopup style={3} id="0ouwqz577kc" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div className="col-lg-6" >
                             <div className="about-content-six">
