@@ -18,7 +18,7 @@ export default function Banner() {
                                 <h2 className="title" data-aos="fade-right" data-aos-delay={0}>trouvez le poste qui vous correspond.</h2>
                                 <p data-aos="fade-right" data-aos-delay={300}>Atlantis Conseil valorise le rôle stratégique des ressources humaines dans la croissance des entreprises en offrant des solutions adaptées aux besoins spécifiques du marché.</p>
                                 <div className="view-all-btn text-start mb-30">
-                                <Link href="/project-details" className="btn btn-three">Trouvez le job de vos rêves</Link>
+                                <Link href="/index-5" className="btn btn-three">Trouvez le job de vos rêves</Link>
                             </div>
                             </div>
                         </div>

@@ -8339,7 +8339,7 @@ label {
 .contact-map iframe {
     width: 100%;
     height: 100%;
-    mix-blend-mode: luminosity;
+    /* mix-blend-mode: luminosity; */
 }
 
 
@@ -9713,6 +9713,7 @@ label {
 }
 
 .copyright-text-two p {
+    color: white;
     margin-bottom: 0;
     font-size: 14px;
 }
@@ -9730,7 +9731,7 @@ label {
     margin-bottom: 30px;
 }
 
-.footer-top-three .footer-content>p {
+.footer-top-three .footer-content p {
     color: #96A1B8;
 }
 

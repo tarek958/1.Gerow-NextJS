@@ -13,7 +13,7 @@ export default function About() {
 </div></div>
 
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-lg-6" >
                             <div className="about-content-six">
                                 <div className="section-title section-title-three mb-30 tg-heading-subheading animation-style1">
                                     <span className="sub-title tg-element-title">CABINET DE</span>
@@ -22,6 +22,7 @@ export default function About() {
                                 <p>Situés au cœur de la Côte d’Azur, nous pouvons répondre aux besoins de nos clients en matière de recrutement et de formation sur la France entière.</p>
                                <p>Notre équipe de consultants, part leur solide expérience, vous apporterons des conseils personnalisés et adaptés à votre entreprise, votre secteur d’activité et votre environnement.</p>
                                 <p>Notre flexibilité, notre disponibilité, notre implication et notre goût pour ce métier feront la différence.</p>
+            <div  id="rh"></div>
                              
                             </div>
                         </div>

@@ -52,38 +52,36 @@ export default function Header5({ scroll, isMobileMenu, handleMobileMenu, isSear
                                         </div>
                                         <div className="navbar-wrap main-menu d-none d-lg-flex">
                                             <ul className="navigation">
-                                                <li className="active"><Link href="/">ACCUEIL</Link></li>
+                                                <li className="active"><Link href="/">Accueil</Link></li>
                                                 <li className="menu-item-has-children">
-                                                    <Link href="/index-4">ENTREPRISES</Link>
+                                                    <Link href="/index-4">Entreprises</Link>
                                                     <ul className="sub-menu">
-                                                        <li><Link href="#">RECRUTEMENT</Link></li>
-                                                        <li><Link href="#">FORMATION</Link></li>
-                                                        <li><Link href="#">CONSEIL RH</Link></li>
-                                                        <li><Link href="#">RÉFÉRENCES</Link></li>
-                                                        <li><Link href="#">MÉTIERS</Link></li>
+                                                        <li><Link href="#">Recrutement</Link></li>
+                                                        <li><Link href="#">Formation</Link></li>
+                                                        <li><Link href="#">Conseil RH</Link></li>
+                                                        <li><Link href="#">Références</Link></li>
+                                                        <li><Link href="#">Métiers</Link></li>
                                                     </ul>
                                                 </li>
                                                 <li className="menu-item-has-children">
-                                                    <Link href="#">CANDIDATS</Link>
+                                                    <Link href="#">Candidats</Link>
                                                     <ul className="sub-menu">
                                                         <li className="menu-item-has-children">
-                                                            <Link href="#">OFFRES D’EMPLOI</Link>
-                                                            <ul className="sub-menu">
-                                                                <li><Link href="#">TEMOIGNAGES</Link></li>
-                                                                <li><Link href="#">CANDIDATURE SPONTANÉE</Link></li>
-                                                            </ul>
+                                                        <li><Link href="#">Offres d’emploi</Link></li>
+                                                                <li><Link href="#">Témoignages</Link></li>
+                                                                <li><Link href="#">Candidature&nbsp;Spontanée</Link></li>
                                                         </li>
                                                     </ul>
                                                 </li>
                                                 <li><Link href="/blog">Blog</Link></li>
-                                                <li><Link href="/contact">contacts</Link></li>
+                                                <li><Link href="/contact">Contacts</Link></li>
                                             </ul>
                                         </div>
                                         <div className="header-action d-none d-md-block">
                                             <ul className="list-wrap">
-                                                <li className="header-search" onClick={handleSearch}>
+                                                {/* <li className="header-search" onClick={handleSearch}>
                                                     <Link href="#"><i className="flaticon-search" /></Link>
-                                                </li>
+                                                </li> */}
                                                 <li className="header-btn">
                                                     <div className="header-action ps-3">
                                                         {token ? (
@@ -116,12 +114,12 @@ export default function Header5({ scroll, isMobileMenu, handleMobileMenu, isSear
                                                 <img src="/assets/img/logo/logo.png" alt="Logo" />
                                             </Link>
                                         </div>
-                                        <div className="mobile-search">
+                                        {/* <div className="mobile-search">
                                             <form action="#">
                                                 <input type="text" placeholder="Search here..." />
                                                 <button><i className="flaticon-search" /></button>
                                             </form>
-                                        </div>
+                                        </div> */}
                                         <div className="menu-outer">
                                             <MobileMenu />
                                         </div>
@@ -141,7 +139,7 @@ export default function Header5({ scroll, isMobileMenu, handleMobileMenu, isSear
                         </div>
                     </div>
                 </div>
-                <SearchPopup isSearch={isSearch} handleSearch={handleSearch} />
+                {/* <SearchPopup isSearch={isSearch} handleSearch={handleSearch} /> */}
             </header>
         </>
     );

@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function About5() {
     return (
         <>
-            <Layout headerStyle={6} footerStyle={2} breadcrumbTitle="About Us">
+            <Layout headerStyle={2} footerStyle={3} breadcrumbTitle="About Us">
                 <div>
                     <section className="about-area-eleven">
                         <div className="container">

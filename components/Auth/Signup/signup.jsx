@@ -41,7 +41,8 @@ function Signup() {
 
     try {
       const response = await axios.post('http://localhost:5000/api/users/signup', formData);
-
+      console.log(response);
+      
       if (response.status === 201) { 
         toast.success('Utilisateur créé avec succès !');
         setTimeout(() => {
@@ -49,6 +50,8 @@ function Signup() {
         }, 1000);
       }
     } catch (err) {
+      console.log(err);
+      
       if (err.response && err.response.data && err.response.data.message) {
         toast.error(err.response.data.message); // Show backend error message
       } else {

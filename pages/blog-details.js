@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function BlogDetails() {
     return (
         <>
-            <Layout headerStyle={6} footerStyle={1} breadcrumbTitle="Blog Details">
+            <Layout headerStyle={2} footerStyle={3} breadcrumbTitle="Blog Details">
                 <section className="blog-details-area pt-120 pb-120">
                     <div className="container">
                         <div className="blog-details-wrap">
@@ -162,12 +162,12 @@ export default function BlogDetails() {
                                 </div>
                                 <div className="col-29">
                                     <aside className="blog-sidebar">
-                                        <div className="sidebar-search">
+                                        {/* <div className="sidebar-search">
                                             <form action="#">
                                                 <input type="text" placeholder="Search Here . . ." />
                                                 <button type="submit"><i className="flaticon-search" /></button>
                                             </form>
-                                        </div>
+                                        </div> */}
                                         <div className="blog-widget">
                                             <h4 className="bw-title">Categories</h4>
                                             <div className="bs-cat-list">

@@ -59,7 +59,7 @@ export default function Testimonial() {
     }
     return (
         <>
-            <section className="testimonial-area-two testimonial-bg-two" data-background="/assets/img/bg/h2_testimonial_bg.jpg">
+            <section id="temoignage" className="testimonial-area-two testimonial-bg-two" data-background="/assets/img/bg/h2_testimonial_bg.jpg">
                 <div className="container">
                     <div className="row justify-content-center">
                         <div className="col-lg-7">
@@ -178,6 +178,7 @@ Encore un grand merci à toi et bonne continuation.</p>
                         </div>
                     </div>
                 </div>
+                    <div id="candidature"></div>
             </section>
         </>
     )

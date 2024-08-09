@@ -36,7 +36,7 @@ export default function Choose() {
     </div>
 </div>
 <div className="view-all-btn text-start mb-30">
-                                <Link href="/project-details" className="btn btn-three">Trouvez le job de vos rêves</Link>
+                                <Link href="/index-5" className="btn btn-three">Trouvez le job de vos rêves</Link>
                             </div>
 
                                 

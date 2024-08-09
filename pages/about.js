@@ -8,7 +8,7 @@ import Link from "next/link"
 export default function About() {
     return (
         <>
-            <Layout headerStyle={6} footerStyle={1} breadcrumbTitle="About Us">
+            <Layout headerStyle={2} footerStyle={3} breadcrumbTitle="About Us">
                 <div>
                     <section className="about-area-seven pt-120 pb-120">
                         <div className="container">

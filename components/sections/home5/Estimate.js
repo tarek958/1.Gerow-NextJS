@@ -62,11 +62,12 @@ export default function Estimate() {
         if (contactRef.current) {
             contactRef.current.scrollIntoView({ behavior: "smooth" });
         }
+
     };
 
     return (
         <>
-            <section className="estimate-area">
+            <section id="offres" className="estimate-area">
                 <div className="container">
                     <div className="section-title text-center mb-25 tg-heading-subheading animation-style2">
                         <span className="sub-title tg-element-title">TROUVER LE BON </span>

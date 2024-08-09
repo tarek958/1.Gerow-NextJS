@@ -158,6 +158,7 @@ export default function Features() {
                                         <h4 className="title">D’AUTRES </h4>
                                       
                                     </div>
+                        <div id='projet'></div>
                                 </div>
                             </div>
                         </div>

@@ -30,6 +30,7 @@ export default function About() {
                                 <div className="view-all-btn text-start mb-30">
                                 <Link href="/project-details" className="btn btn-three">Parlons de votre projet</Link>
                             </div>
+                            <div  id="recrutement"></div>
                             </div>
                         </div>
                     </div>

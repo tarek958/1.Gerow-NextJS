@@ -29,13 +29,14 @@ export default function Faq() {
                                     <Accordion />
                                 </div>
                                 <div className="view-all-btn text-start fa-4x mb-30">
-                                <Link href="#" className="btn btn-three" data-aos="fade-right" data-aos-delay={600}>Trouvez vos prochains talents</Link>
+                                <Link href="/index-4" className="btn btn-three" data-aos="fade-right" data-aos-delay={600}>Trouvez vos prochains talents</Link>
                             </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
+                        
         </>
     )
 }

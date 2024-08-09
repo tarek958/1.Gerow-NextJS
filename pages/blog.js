@@ -3,7 +3,7 @@ import Layout from "@/components/layout/Layout"
 export default function Blog() {
     return (
         <>
-        <Layout headerStyle={6} footerStyle={1} breadcrumbTitle="Dernier blog">
+        <Layout headerStyle={6} footerStyle={3} breadcrumbTitle="Dernier blog">
 
             <section className="blog-area-two blog-bg-two" data-background="/assets/img/bg/h2_blog_bg.jpg">
                 <div className="container">

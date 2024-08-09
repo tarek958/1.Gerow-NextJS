@@ -9,7 +9,7 @@ export default function About3() {
     const handleToggle = () => setToggled(!isToggled)
     return (
         <>
-            <Layout headerStyle={6} footerStyle={1} breadcrumbTitle="About Us">
+            <Layout headerStyle={2} footerStyle={3} breadcrumbTitle="About Us">
                 <div>
                     <section className="about-area-nine pt-120 pb-120">
                         <div className="container">

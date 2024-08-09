@@ -20,7 +20,7 @@ import Testimonial2 from "@/components/sections/home5/Testimonial2"
 export default function Home5() {
     return (
         <>
-            <Layout headerStyle={5} footerStyle={1}>
+            <Layout headerStyle={2} footerStyle={3}>
                 <Slider />
                 <AboutTwo />
                 

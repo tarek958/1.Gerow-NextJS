@@ -53,7 +53,7 @@ export default function Overview() {
             
         </div>
         <div className="view-all-btn text-start mb-30">
-                                <Link href="/project-details" className="btn btn-three">Trouvez vos prochains Talents</Link>
+                                <Link href="/index-4" className="btn btn-three">Trouvez vos prochains Talents</Link>
                             </div>
                             </div>
                         </div>

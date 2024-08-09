@@ -22,8 +22,10 @@ export default function Team() {
                                 </div>
                                 <div className="team-content-five">
                                     <h2 className="title"><Link href="/team-details">Logik</Link></h2>
-                                    <span>Atlantis Conseil a su répondre de façon efficace et rapide à nos différentes demandes. Pour preuve nous avons un certain nombre de collaborateurs dans nos bureaux et nos effectifs actuels qui ont été recrutés par leurs soins. Atlantis Conseil nous permet d’éviter les « erreurs de casting », notamment grâce au travail de fond réalisé qui permet de recruter le bon profil.</span>
-                                    
+                                    {/* <span>Atlantis Conseil a su répondre de façon efficace et rapide à nos différentes demandes. Pour preuve nous avons un certain nombre de collaborateurs dans nos bureaux et nos effectifs actuels qui ont été recrutés par leurs soins. Atlantis Conseil nous permet d’éviter les « erreurs de casting », notamment grâce au travail de fond réalisé qui permet de recruter le bon profil.</span> */}
+                                    <span>
+
+                                    Atlantis Conseil a efficacement répondu à nos besoins de recrutement, avec plusieurs de nos collaborateurs actuels ayant été recrutés par leurs soins. Leur approche approfondie nous aide à éviter les erreurs de casting en garantissant des profils parfaitement adaptés.</span>
                                 </div>
                             </div>
                         </div>
@@ -39,7 +41,7 @@ export default function Team() {
                                 </div>
                             </div>
                         </div>
-                        
+                        <div id="metier"></div>
                     </div>
                 </div>
             </section>

@@ -41,8 +41,8 @@ export default function Footer1() {
                                         <div className="footer-link">
                                             <ul className="list-wrap">
                                             <li><Link href="/">Accueil</Link></li>
-                                                <li><Link href="/index-4">entreprises</Link></li>
-                                                <li><Link href="/index-5">candidates</Link></li>
+                                                <li><Link href="/index-4">Entreprises</Link></li>
+                                                <li><Link href="/index-5">Candidates</Link></li>
                                                 <li><Link href="/blog">Blog</Link></li>
                                                 <li><Link href="/contact">Contacts</Link></li>
                                             </ul>

@@ -7,6 +7,35 @@ export default function Header4({ scroll, isMobileMenu, handleMobileMenu, isSear
     return (
         <>
             <header className="header-style-five transparent-header">
+            <div className="heder-top-wrap">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-7">
+                                <div className="header-top-left">
+                                    <ul className="list-wrap">
+                                        <li><i className="flaticon-location" />IMMEUBLE PALAZZO 29 Avenue Simone Veil 06200 NICE</li>
+                                        <li><i className="flaticon-mail" /><Link href="mailto:recrutement@atlantis-conseil.fr">recrutement@atlantis-conseil.fr</Link></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div className="col-lg-5">
+                                <div className="header-top-right">
+                                    <div className="header-contact">
+                                        <Link href="tel:0489977508"><i className="flaticon-phone-call" />04 89 97 75 08</Link>
+                                    </div>
+                                    <div className="header-social">
+                                        <ul className="list-wrap">
+                                            <li><Link href="#"><i className="fab fa-facebook-f" /></Link></li>
+                                            <li><Link href="#"><i className="fab fa-twitter" /></Link></li>
+                                            <li><Link href="#"><i className="fab fa-instagram" /></Link></li>
+                                            <li><Link href="#"><i className="fab fa-pinterest-p" /></Link></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="sticky-header" className={`menu-area ${scroll ? "sticky-menu" : ""}`}>
                     <div className="container">
                         <div className="row">
@@ -24,27 +53,25 @@ export default function Header4({ scroll, isMobileMenu, handleMobileMenu, isSear
                                         <div className="navbar-wrap main-menu d-none d-lg-flex">
                                             <ul className="navigation">
                                                 <li className="active">
-                                                    <Link href="/">ACCUEIL</Link>
+                                                    <Link href="/">Accueil</Link>
                                                 </li>
                                                 <li className="menu-item-has-children">
-                                                    <Link href="/index-4">ENTREPRISES</Link>
+                                                    <Link href="/index-4">Entreprises</Link>
                                                     <ul className="sub-menu">
-                                                        <li><Link href="#about-area-six">RECRUTEMENT</Link></li>
-                                                        <li><Link href="#">FORMATION</Link></li>
-                                                        <li><Link href="#about-area-four">CONSEIL RH</Link></li>
-                                                        <li><Link href="#">RÉFÉRENCES</Link></li>
-                                                        <li><Link href="#">MÉTIERS</Link></li>
+                                                        <li><Link href="#about-area-six">Recrutement</Link></li>
+                                                        <li><Link href="#">Formation</Link></li>
+                                                        <li><Link href="#about-area-four">Conseil RH</Link></li>
+                                                        <li><Link href="#">Références</Link></li>
+                                                        <li><Link href="#">Métiers</Link></li>
                                                     </ul>
                                                 </li>
                                                 <li className="menu-item-has-children">
-                                                    <Link href="/index-5">CANDIDATS</Link>
+                                                    <Link href="/index-5">Candidats</Link>
                                                     <ul className="sub-menu">
                                                         <li className="menu-item-has-children">
-                                                            <Link href="#">OFFRES D’EMPLOI</Link>
-                                                            <ul className="sub-menu">
-                                                                <li><Link href="#">TEMOIGNAGES</Link></li>
-                                                                <li><Link href="#">CANDIDATURE SPONTANÉE</Link></li>
-                                                            </ul>
+                                                        <li><Link href="#">Offres d’emploi</Link></li>
+                                                                <li><Link href="#">Témoignages</Link></li>
+                                                                <li><Link href="#">Candidature&nbsp;Spontanée</Link></li>
                                                         </li>
                                                     </ul>
                                                 </li>
@@ -52,7 +79,7 @@ export default function Header4({ scroll, isMobileMenu, handleMobileMenu, isSear
                                                     <Link href="/blog">Blog</Link>
                                                 </li>
                                                 <li>
-                                                    <Link href="/contact">contacts</Link>
+                                                    <Link href="/contact">Contacts</Link>
                                                 </li>
                                             </ul>
                                         </div>
@@ -92,12 +119,12 @@ export default function Header4({ scroll, isMobileMenu, handleMobileMenu, isSear
                                                 <img src="/assets/img/logo/logo.png" alt="Logo" />
                                             </Link>
                                         </div>
-                                        <div className="mobile-search">
+                                        {/* <div className="mobile-search">
                                             <form action="#">
                                                 <input type="text" placeholder="Search here..." />
                                                 <button><i className="flaticon-search" /></button>
                                             </form>
-                                        </div>
+                                        </div> */}
                                         <div className="menu-outer">
                                             <MobileMenu />
                                         </div>

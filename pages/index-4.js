@@ -19,7 +19,7 @@ import Contact from "@/components/sections/home4/Contact"
 export default function Home4() {
     return (
         <>
-            <Layout headerStyle={4} footerStyle={2}>
+            <Layout headerStyle={2} footerStyle={3}>
                 <Banner />
                 <About />
                 <About2 />

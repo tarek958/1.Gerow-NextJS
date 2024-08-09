@@ -4,7 +4,7 @@ import Link from "next/link"
 export default function Custom404() {
     return (
         <>
-            <Layout headerStyle={6} footerStyle={1}>
+            <Layout headerStyle={2} footerStyle={3}>
                 <section className="error-area">
                     <div className="container">
                         <div className="row">

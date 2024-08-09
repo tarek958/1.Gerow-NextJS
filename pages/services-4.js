@@ -5,7 +5,7 @@ import Link from "next/link"
 export default function Service4() {
     return (
         <>
-            <Layout headerStyle={6} footerStyle={1} breadcrumbTitle="Our Services">
+            <Layout headerStyle={2} footerStyle={3} breadcrumbTitle="Our Services">
                 <div>
                     <section className="services-area-three">
                         <div className="container">
