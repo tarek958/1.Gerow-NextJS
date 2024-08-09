@@ -13,12 +13,7 @@ export default function Contact() {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
-        if (!token) {
-          setError("No token found");
-          window.location.href = "/signin";
-          setLoading(false);
-          return;
-        }
+       
 
         const decoded = jwtDecode(token); // jwtDecode should be used as default import
         const userId = decoded.id;
