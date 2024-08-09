@@ -193,7 +193,7 @@ const Admin = () => {
             }
           };
   
-          const response = await axios.get(`http://148.113.194.169:5000/api/users/${userId}`, config);
+          const response = await axios.get(`http://localhost:5000/api/users/${userId}`, config);
           const userRole = response.data.role;
   
           if (userRole === 'admin') {
@@ -220,7 +220,7 @@ const Admin = () => {
           }
         };
   
-        const response = await axios.get('http://148.113.194.169:5000/api/users/all', config);
+        const response = await axios.get('http://localhost:5000/api/users/all', config);
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -255,7 +255,7 @@ const Admin = () => {
           }
         };
   
-        await axios.post('http://148.113.194.169:5000/api/users/signup', form, config);
+        await axios.post('http://localhost:5000/api/users/signup', form, config);
         fetchUsers();
         setShowModal(false);
         setForm({
@@ -282,7 +282,7 @@ const Admin = () => {
           }
         };
   
-        await axios.put(`http://148.113.194.169:5000/api/users/${selectedUser._id}`, form, config);
+        await axios.put(`http://localhost:5000/api/users/${selectedUser._id}`, form, config);
         fetchUsers();r
         setShowModal(false);
         setSelectedUser(null);
@@ -310,7 +310,7 @@ const Admin = () => {
           }
         };
   
-        await axios.delete(`http://148.113.194.169:5000/api/users/${deleteUserId}`, config);
+        await axios.delete(`http://localhost:5000/api/users/${deleteUserId}`, config);
         fetchUsers();
         setShowModal(false);
         toast.success('User deleted successfully!');

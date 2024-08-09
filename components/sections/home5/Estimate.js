@@ -23,7 +23,7 @@ export default function Estimate() {
 
     const fetchRegions = async () => {
         try {
-            const res = await fetch('http://148.113.194.169:5000/api/postss/regions');
+            const res = await fetch('http://localhost:5000/api/postss/regions');
             const data = await res.json();
             setRegions(data);
         } catch (error) {
@@ -36,7 +36,7 @@ export default function Estimate() {
         try {
             const region = regions[regionIndex - 1];
             const query = new URLSearchParams({ region, page: currentPage, limit: 10, keyword }).toString();
-            const res = await fetch(`http://148.113.194.169:5000/api/postss/by-region?${query}`);
+            const res = await fetch(`http://localhost:5000/api/postss/by-region?${query}`);
             const data = await res.json();
             setPosts(data.posts);
             setTotalPages(data.totalPages);
@@ -120,23 +120,29 @@ export default function Estimate() {
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            {Array.isArray(posts) && posts.length > 0 ? (
-                                                                posts.map((post, index) => (
-                                                                    <tr key={index}>
-                                                                        <td>{post.conditionsEtAvantages}</td>
-                                                                        <td>{post.descriptionDuPoste}</td>
-                                                                        <td>{post.presentationDeLEntreprise}</td>
-                                                                        <td>
-                                                                            <button style={{color:'white',backgroundColor:'#0055FF',borderRadius:'5px'}} onClick={() => scrollToContact(post.agence)}>Postuler</button>
-                                                                        </td>
-                                                                    </tr>
-                                                                ))
-                                                            ) : (
-                                                                <tr>
-                                                                    <td colSpan="4">No posts available</td>
-                                                                </tr>
-                                                            )}
-                                                        </tbody>
+    {Array.isArray(posts) && posts.length > 0 ? (
+        posts.map((post, index) => (
+            <tr key={index}>
+                <td>{post.conditionsEtAvantages}</td>
+                <td>{post.descriptionDuPoste}</td>
+                <td>{post.presentationDeLEntreprise}</td>
+                <td>
+                    <Link 
+  href={`/${post._id}`} 
+  style={{ color: 'white', backgroundColor: '#0055FF', borderRadius: '5px', padding: '5px 10px', textDecoration: 'none' }}>
+    Voir Détails
+</Link>
+
+                </td>
+            </tr>
+        ))
+    ) : (
+        <tr>
+            <td colSpan="4">No posts available</td>
+        </tr>
+    )}
+</tbody>
+
                                                     </table>
                                                 )}
                                                 <div className="pagination">
