@@ -43,7 +43,7 @@ const Settings = () => {
         };
 
         const response = await axios.get(
-          `http://localhost:5000/api/users/${userId}`,
+          `http://148.113.194.169:5000/api/users/${userId}`,
           config
         );
         setUser(response.data);
@@ -77,7 +77,7 @@ const Settings = () => {
           },
         };
         await axios.put(
-          `http://localhost:5000/api/users/${user.id}`,
+          `http://148.113.194.169:5000/api/users/${user.id}`,
           user,
           config
         );

@@ -41,7 +41,7 @@ export default function AuthForm({ type }) {
 
   const onSubmit = async (data) => {
     try {
-      const response = await axios.post(`http://localhost:5000/api/users/${type}`, data);
+      const response = await axios.post(`http://148.113.194.169:5000/api/users/${type}`, data);
 
       if (response.status === 201) { 
         toast.success('User created successfully!');

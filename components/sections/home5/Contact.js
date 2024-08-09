@@ -37,7 +37,7 @@ export default function Contact() {
     formData.append('filename', generatedFilename);
 
     try {
-      const response = await fetch('http://148.113.194.169:5000/upload_cv', {
+      const response = await fetch('http://148.113.194.169:4000/upload_cv', {
         method: 'POST',
         body: formData,
       });
@@ -136,7 +136,7 @@ export default function Contact() {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/files/upload', {
+      const response = await fetch('http://148.113.194.169:5000/api/files/upload', {
         method: 'POST',
         body: data,
       });
