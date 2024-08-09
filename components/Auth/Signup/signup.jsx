@@ -61,14 +61,14 @@ function Signup() {
   };
 
   return (
-    <MDBContainer fluid className="p-3 d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
+    <MDBContainer fluid className="signinContainer p-3 d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
       <MDBRow className='d-flex justify-content-center'>
-        <MDBCol col='8' md='6' className='d-flex justify-content-center'>
+        <MDBCol col='8' md='6' className='signinImage d-flex justify-content-center'>
           <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Image de téléphone" />
         </MDBCol>
 
         <MDBCol col='2' md='4'>
-          <MDBCol col='2' md='40' className="p-3 my-3 d-flex justify-content-center align-items-center">
+          <MDBCol col='2' md='40' className="signinForm p-3 my-3 d-flex justify-content-center align-items-center">
             <img src="https://www.atlantis-conseil.fr/j9Ch0H/uploads/2020/05/AtlantisConseil-Logo-V2-170-1.png" alt="Logo" className="img-fluid" style={{ maxWidth: '150px' }} />
           </MDBCol>
 
