@@ -14,7 +14,7 @@ const FileUploadComponent = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:4000/upload', formData, {
+      const response = await axios.post('http://148.113.194.169:4000/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

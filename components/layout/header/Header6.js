@@ -95,11 +95,11 @@ export default function Header6({ scroll, isMobileMenu, handleMobileMenu, isSear
                                                                 {token ? (
                                                                     <>
                                                                         <Link href="/profile">Profile</Link>
-                                                                        <Link
+                                                                        <Link href="/"
                                                                             className=""
                                                                             onClick={() => {
                                                                                 localStorage.removeItem('token');
-                                                                                window.location.href = '/';
+                                                                                
                                                                             }}
                                                                         >
                                                                             Se déconnecter

@@ -22,7 +22,7 @@ const FilesList = () => {
                     Authorization: `Bearer ${token}`,
                 },
             };
-        const response = await axios.get("http://localhost:5000/api/posts/all",config);
+        const response = await axios.get("http://148.113.194.169:5000/api/posts/all",config);
         setFiles(response.data);
       } catch (err) {
         setError("Failed to fetch files");

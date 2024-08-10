@@ -23,7 +23,7 @@ export default function Estimate() {
 
     const fetchRegions = async () => {
         try {
-            const res = await fetch('http://localhost:5000/api/postss/regions');
+            const res = await fetch('http://148.113.194.169:5000/api/postss/regions');
             const data = await res.json();
             setRegions(data);
         } catch (error) {
@@ -36,7 +36,7 @@ export default function Estimate() {
         try {
             const region = regions[regionIndex - 1];
             const query = new URLSearchParams({ region, page: currentPage, limit: 10, keyword }).toString();
-            const res = await fetch(`http://localhost:5000/api/postss/by-region?${query}`);
+            const res = await fetch(`http://148.113.194.169:5000/api/postss/by-region?${query}`);
             const data = await res.json();
             setPosts(data.posts);
             setTotalPages(data.totalPages);

@@ -48,11 +48,11 @@ export default function MobileMenu() {
                         {token ? (
                                   <>
                                   <Link href="/profile">Profile</Link>
-                                  <Link
+                                  <Link href="/"
                                     className=""
                                     onClick={() => {
                                       localStorage.removeItem('token');
-                                      window.location.href = '/';
+                                      
                                     }}
                                   >
                                     Se déconnecter

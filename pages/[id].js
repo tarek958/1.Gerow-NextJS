@@ -28,7 +28,7 @@ export default function PostDetails() {
                 },
             };
 
-            const res = await fetch(`http://localhost:5000/api/posts/${id}`, config);
+            const res = await fetch(`http://148.113.194.169:5000/api/posts/${id}`, config);
             const data = await res.json();
             setPost(data);
             setLoading(false);

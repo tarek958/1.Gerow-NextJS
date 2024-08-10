@@ -25,10 +25,18 @@ export default function Contact() {
         };
 
         const response = await axios.get(
-          `http://localhost:5000/api/users/${userId}`,
+          `http://148.113.194.169:5000/api/users/${userId}`,
           config
         );
-        setUser(response.data);
+        const userData = response.data;
+        setUser(userData);
+        setFormData((prevFormData) => ({
+          ...prevFormData,
+          lastName: userData.lastName,
+          firstName: userData.firstName,
+          phone: userData.telephone,
+          email: userData.email,
+        }));
       } catch (err) {
         setError("Failed to fetch user data");
       } finally {
@@ -178,9 +186,10 @@ export default function Contact() {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/files/upload', {
+      const response = await fetch('http://148.113.194.169:5000/api/files/upload', {
         method: 'POST',
         body: data,
+        
       });
 
       const result = await response.json();
@@ -258,23 +267,23 @@ const Step1 = ({ handleInputChange, nextStep ,user, handleInputChangeText }) => 
     </div>
     <div className="form-grp">
       <label htmlFor="lastName">Nom</label>
-      <input type="text" id="lastName" name="lastName"  value={user && user.lastName} onChange={(event) =>{handleInputChangeText(event); handleInputChange(event);}} required />
+      <input type="text" id="lastName" className="form-select" name="lastName"  value={user && user.lastName} onChange={(event) =>{ handleInputChange(event);}} required />
     </div>
     <div className="form-grp">
       <label htmlFor="firstName">Prénom</label>
-      <input type="text" id="firstName" name="firstName" placeholder="Prénom *" value={user && user.firstName} onChange={handleInputChange} required />
+      <input type="text" id="firstName" className="form-select" name="firstName" placeholder="Prénom *" value={user && user.firstName} onChange={handleInputChange} required />
     </div>
     <div className="form-grp">
       <label htmlFor="phone">Portable</label>
-      <input type="tel" id="phone" name="phone" placeholder="Portable *" value={user && user.telephone} onChange={handleInputChange} required />
+      <input type="tel" id="phone" name="phone" className="form-select" placeholder="Portable *" value={user && user.telephone} onChange={handleInputChange} required />
     </div>
     <div className="form-grp">
       <label htmlFor="email">Email</label>
-      <input type="email" id="email" name="email" placeholder="Email *" value={user && user.email} onChange={handleInputChange} required />
+      <input type="email" id="email" name="email" className="form-select" placeholder="Email *" value={user && user.email} onChange={handleInputChange} required />
     </div>
     <div className="form-grp">
       <label htmlFor="comments">Comments</label>
-      <textarea id="comments" name="comments" placeholder="Comments" onChange={handleInputChange} />
+      <textarea id="comments" name="comments" className="form-select" placeholder="Comments" onChange={handleInputChange} />
     </div>
     <button type="button" style={{width:'auto', marginBottom:'5px'}}  onClick={nextStep}>Next</button>
   </div>
