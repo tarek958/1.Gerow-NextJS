@@ -58,7 +58,7 @@ export default function Estimate() {
     }, [activeIndex, currentPage, searchKeyword]);
 
     const scrollToContact = (company) => {
-        localStorage.setItem("selectedCompany", company);
+        localStorage.setItem("selectedCompany", company); // Store company in local storage
         if (contactRef.current) {
             contactRef.current.scrollIntoView({ behavior: "smooth" });
         }
@@ -92,7 +92,7 @@ export default function Estimate() {
                                         )}
                                     </select>
 
-                                    {/* Search Input */}
+                                    
                                     <form onSubmit={handleSearch} className="mt-4">
                                         <input 
                                             type="text" 
@@ -101,7 +101,7 @@ export default function Estimate() {
                                             onChange={(e) => setSearchKeyword(e.target.value)} 
                                             className="form-control"
                                         />
-                                        
+                                        <button type="submit" className="btn btn-primary mt-2">Recherche</button>
                                     </form>
 
                                     <div className="tab-content" id="myTabContent">
