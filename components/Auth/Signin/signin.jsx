@@ -2,20 +2,29 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
 import { useRouter } from 'next/router'; 
-import { MDBContainer, MDBCol, MDBRow, MDBBtn, MDBInput, MDBCheckbox } from 'mdb-react-ui-kit';
+import { MDBContainer, MDBCol, MDBRow, MDBInput } from 'mdb-react-ui-kit';
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; 
+import ForgotPasswordModal from './ForgotPasswordModal'; // Import the modal component
 
 function Signin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+
+  const handleForgotPasswordClick = () => {
+    setShowForgotPasswordModal(true);
+  };
+
+  const handleCloseForgotPasswordModal = () => {
+    setShowForgotPasswordModal(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic client-side validation
     if (!email || !password) {
       toast.error("L'email et le mot de passe sont requis.");
       return;
@@ -35,7 +44,7 @@ function Signin() {
 
       if (response.status === 200) {
         toast.success('Connexion réussie');
-        localStorage.setItem('token', response.data.token); // Save token to localStorage
+        localStorage.setItem('token', response.data.token); 
         setTimeout(() => {
           router.push('/');
         }, 500);
@@ -43,7 +52,7 @@ function Signin() {
     } catch (error) {
       console.error('Échec :', error);
       if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message); // Show backend error message
+        toast.error(error.response.data.message); 
       } else {
         toast.error('Échec de la connexion. Veuillez réessayer.');
       }
@@ -83,19 +92,20 @@ function Signin() {
 
             {error && <div className="text-danger mb-3">{error}</div>}
 
-            {/* <div className="d-flex justify-content-between mx-4 mb-4">
-              <MDBCheckbox name='flexCheck' value='' id='flexCheckDefault' label='Se souvenir de moi' />
-              <a href="!#">Mot de passe oublié ?</a>
-            </div> */}
+            <div className="d-flex justify-content-between mb-4">
+              <a href="#" onClick={handleForgotPasswordClick}>Mot de passe oublié ?</a>
+            </div>
 
             <div className="btn-center">
-                <button className="btn btn-primary mb-4 w-20" type="submit">Se connecter</button>
-            </div>            <div className="text-center mt-4">
+              <button className="btn btn-primary mb-4 w-20" type="submit">Se connecter</button>
+            </div>
+            <div className="text-center mt-4">
               <p>Vous n'avez pas de compte ? <Link href="/signup">S'inscrire</Link></p>
             </div>
           </form>
         </MDBCol>
       </MDBRow>
+      <ForgotPasswordModal show={showForgotPasswordModal} handleClose={handleCloseForgotPasswordModal} />
       <ToastContainer />
     </MDBContainer>
   );
