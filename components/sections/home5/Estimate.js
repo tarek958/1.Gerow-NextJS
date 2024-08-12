@@ -58,7 +58,7 @@ export default function Estimate() {
     }, [activeIndex, currentPage, searchKeyword]);
 
     const scrollToContact = (company) => {
-        localStorage.setItem("selectedCompany", company); // Store company in local storage
+        localStorage.setItem("selectedCompany", company);
         if (contactRef.current) {
             contactRef.current.scrollIntoView({ behavior: "smooth" });
         }
@@ -91,73 +91,62 @@ export default function Estimate() {
                                             <option disabled>No regions available</option>
                                         )}
                                     </select>
+
+                                    {/* Search Input */}
+                                    <form onSubmit={handleSearch} className="mt-4">
+                                        <input 
+                                            type="text" 
+                                            placeholder="Recherche par mot-clé..." 
+                                            value={searchKeyword} 
+                                            onChange={(e) => setSearchKeyword(e.target.value)} 
+                                            className="form-control"
+                                        />
+                                        
+                                    </form>
+
                                     <div className="tab-content" id="myTabContent">
-                                        <div className={activeIndex === 1 ? "tab-pane fade show active" : "tab-pane fade"}>
-                                            <div className="estimate-form-wrap">
-                                                <form onSubmit={handleSearch}>
-                                                    <div className="form-grp fa-3x">
-                                                        <input 
-                                                            type="text" 
-                                                            placeholder="Mots-clés" 
-                                                            value={searchKeyword} 
-                                                            onChange={(e) => setSearchKeyword(e.target.value)} 
-                                                        />
-                                                    </div>
-                                                    <button className="btn btn-three" type="submit">Rechercher</button>
-                                                </form>
-                                            </div>
-                                            <div className="table-responsive mt-4">
-                                                {loading ? (
-                                                    <p>Loading...</p>
-                                                ) : (
-                                                    <table className="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Title</th>
-                                                                <th>Description</th>
-                                                                <th>Conditions</th>
-                                                                <th>Actions</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-    {Array.isArray(posts) && posts.length > 0 ? (
-        posts.map((post, index) => (
-            <tr key={index}>
-                <td>{post.conditionsEtAvantages}</td>
-                <td>{post.descriptionDuPoste}</td>
-                <td>{post.presentationDeLEntreprise}</td>
-                <td>
-                    <Link 
-  href={`/${post._id}`} 
-  style={{ color: 'white', backgroundColor: '#0055FF', borderRadius: '5px', padding: '5px 10px', textDecoration: 'none' }}>
-    Voir Détails
-</Link>
-
-                </td>
-            </tr>
-        ))
-    ) : (
-        <tr>
-            <td colSpan="4">No posts available</td>
-        </tr>
-    )}
-</tbody>
-
-                                                    </table>
-                                                )}
-                                                <div className="pagination">
-                                                    {Array.from({ length: totalPages }, (_, i) => (
-                                                        <button
-                                                            key={i}
-                                                            onClick={() => setCurrentPage(i + 1)}
-                                                            disabled={currentPage === i + 1}
-                                                        >
-                                                            {i + 1}
-                                                        </button>
-                                                    ))}
+                                        {regions.map((region, index) => (
+                                            <div key={index} className={activeIndex === index + 1 ? "tab-pane fade show active" : "tab-pane fade"}>
+                                                <div className="table-responsive mt-4">
+                                                    {loading ? (
+                                                        <p>Loading...</p>
+                                                    ) : (
+                                                        <table className="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Title</th>
+                                                                    <th>Description</th>
+                                                                    <th>Conditions</th>
+                                                                    <th>Actions</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {Array.isArray(posts) && posts.length > 0 ? (
+                                                                    posts.map((post, postIndex) => (
+                                                                        <tr key={postIndex}>
+                                                                            <td>{post.conditionsEtAvantages}</td>
+                                                                            <td>{post.descriptionDuPoste}</td>
+                                                                            <td>{post.presentationDeLEntreprise}</td>
+                                                                            <td>
+                                                                                <Link 
+                                                                                    href={`/${post._id}`} 
+                                                                                    style={{ color: 'white', backgroundColor: '#0055FF', borderRadius: '5px', padding: '5px 10px', textDecoration: 'none' }}>
+                                                                                    Voir Détails
+                                                                                </Link>
+                                                                            </td>
+                                                                        </tr>
+                                                                    ))
+                                                                ) : (
+                                                                    <tr>
+                                                                        <td colSpan="4">No posts available</td>
+                                                                    </tr>
+                                                                )}
+                                                            </tbody>
+                                                        </table>
+                                                    )}
                                                 </div>
                                             </div>
-                                        </div>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -173,8 +162,6 @@ export default function Estimate() {
                     <img src="/assets/img/services/h4_services_shape.png" alt="" data-aos="fade-left" data-aos-delay={200} />
                 </div>
             </section>
-
-           
         </>
     );
 }
