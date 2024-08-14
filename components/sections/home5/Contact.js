@@ -1,21 +1,84 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect,useState, useRef } from 'react';
 import axios from 'axios';
 import StepWizard from 'react-step-wizard';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { jwtDecode } from "jwt-decode";
+
+
+
+
 export default function Contact() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [user, setUser] = useState('');
+  const [errors, setErrors] = useState({});
+  const wizardRef = useRef(null);
+  const [isFileValid, setIsFileValid] = useState(false);
+  const [fileError, setFileError] = useState('');
+
+  const validateFile = (file) => {
+    if (!file) {
+      toast.error('Veuillez sélectionner un fichier PDF.');
+      setIsFileValid(false);
+      return false;
+    }
+    if (file.type !== 'application/pdf') {
+      toast.error('Le fichier doit être au format PDF.');
+      setIsFileValid(false);
+      return false;
+    }
+    setFileError('');
+    setIsFileValid(true); // Set file as valid
+    return true;
+  };
+ 
+  const handleFileChangeWithValidation = (event) => {
+    const file = event.target.files[0];
+    if (validateFile(file)) {
+      handleFileChange(event);
+      handleFileChangeUpload(event);
+    }else {
+      console.log("nott Trueee")
+      setIsFileValid(false);
+    }
+  };
+
+
+  const validateFields = () => {
+    const newErrors = {};
+
+    if (!user?.title) newErrors.title = "Veuillez sélectionner une civilité.";
+    if (!user?.lastName) newErrors.lastName = "Veuillez entrer un nom.";
+    if (!user?.firstName) newErrors.firstName = "Veuillez entrer un prénom.";
+    if (!user?.telephone) newErrors.phone = "Veuillez entrer un numéro de portable.";
+    if (!user?.email) newErrors.email = "Veuillez entrer une adresse e-mail.";
+
+ 
+    Object.values(newErrors).forEach((error) => {
+      toast.error(error);
+    });
+
+   
+    return Object.keys(newErrors).length === 0;
+  };
+
+
+  const handleNextStep = () => {
+    console.log("Nott passsedvalidationnn")
+    if (validateFields()) {
+      console.log("passsedvalidationnn")
+      wizardRef.current.nextStep();
+    }
+  };
   const company = localStorage.getItem('selectedCompany');
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
        
 
-        const decoded = jwtDecode(token); // jwtDecode should be used as default import
+        const decoded = jwtDecode(token); 
         const userId = decoded.id;
 
         const config = {
@@ -43,6 +106,7 @@ export default function Contact() {
         setLoading(false);
       }
     };
+  
   useEffect(() => {
 
     fetchUserData();
@@ -53,7 +117,7 @@ export default function Contact() {
     title: '',
     lastName: '',
     firstName: '',
-    filename: '', // This will be updated with the generated filename
+    filename: '', 
     phone: '',
     email: '',
     comments: '',
@@ -64,9 +128,9 @@ export default function Contact() {
   });
   
   const generateFilename = (file) => {
-    const timestamp = Date.now(); // Current timestamp
-    const fileExtension = file.name.split('.').pop(); // Extract the file extension
-    const generatedFilename = `${timestamp}.${fileExtension}`; // Generate the filename
+    const timestamp = Date.now(); 
+    const fileExtension = file.name.split('.').pop(); 
+    const generatedFilename = `${timestamp}.${fileExtension}`; 
     return generatedFilename;
   };
 
@@ -86,7 +150,7 @@ export default function Contact() {
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = url;
-        a.download = generatedFilename; // Use the same generated filename for download
+        a.download = generatedFilename; 
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -98,21 +162,26 @@ export default function Contact() {
     }
   };
   const handleInputChangeText = (e) => {
+    
     if (user) {
-      setUser({
+      const updatedUser = {
         ...user,
         [e.target.name]: e.target.value,
-      });
+      };
+     
+      setUser(updatedUser);
     }
   };
+  
   const handleFileChangeUpload = (e) => {
     const selectedFile = e.target.files[0];
     if (selectedFile) {
       const generatedFilename = generateFilename(selectedFile);
+      console.log(generateFilename)
       setFile(selectedFile);
       setFormData((prevFormData) => ({
         ...prevFormData,
-        filename: generatedFilename, // Update the filename in the formData state
+        filename: generatedFilename, 
       }));
       uploadPdf(selectedFile, generatedFilename);
     }
@@ -135,7 +204,7 @@ export default function Contact() {
       setFormData((prevFormData) => ({
         ...prevFormData,
         cvUpload: selectedFile,
-        filename: generatedFilename, // Update the filename in the formData state
+        filename: generatedFilename, 
       }));
       uploadPdf(selectedFile, generatedFilename);
     }
@@ -216,28 +285,30 @@ export default function Contact() {
           <div className="col-lg-7">
             <div className="contact-form">
               <form onSubmit={handleSubmit}>
-                <StepWizard>
+              <StepWizard ref={wizardRef}>
                   <Step1
                     handleInputChange={handleInputChange}
                     handleInputChangeText={handleInputChangeText}
-                    nextStep={() => {}}
+                    handleNextStep={handleNextStep}
                     user={user}
                   />
                   <Step2
                     education={formData.education}
                     handleEducationChange={handleEducationChange}
                     addEducation={addEducation}
-                    prevStep={() => {}}
-                    nextStep={() => {}}
+                
                   />
                   <Step3
                     experience={formData.experience}
                     handleExperienceChange={handleExperienceChange}
                     addExperience={addExperience}
-                    prevStep={() => {}}
-                    nextStep={() => {}}
+                  
                   />
-                  <Step4 handleFileChange={handleFileChange} handleFileChangeUpload={handleFileChangeUpload}/>
+                  <Step4 handleFileChange={handleFileChange}
+                   handleFileChangeUpload={handleFileChangeUpload}
+                   handleFileChangeWithValidation={handleFileChangeWithValidation}
+                   isFileValid={isFileValid}
+                   />
                 </StepWizard>
                 
               </form>
@@ -248,50 +319,111 @@ export default function Contact() {
       <div className="contact-shape">
         <img src="/assets/img/images/contact_shape.png" alt="" />
       </div>
-      <ToastContainer/>
+      
     </section>
   );
 }
 
-const Step1 = ({ handleInputChange, nextStep ,user, handleInputChangeText }) => {
-  return(
-  <div>
-    <h3>Étape 1: Informations personnelles</h3>
-    <div className="form-grp">
-      <label htmlFor="titleSelect">Civilité</label>
-      <select id="titleSelect" className="form-select" name="title" onChange={handleInputChange} required>
-        <option value="">Sélectionnez...</option>
-        <option value="Mme">Mme</option>
-        <option value="M.">M.</option>
-      </select>
+const Step1 = ({ handleInputChange, handleNextStep, errors = {}, user, handleInputChangeText }) => {
+  return (
+    <div>
+      <h3>Étape 1: Informations personnelles</h3>
+      <div className="form-grp">
+        <label htmlFor="titleSelect">Civilité</label>
+        <select
+          id="titleSelect"
+          className="form-select"
+          name="title"
+          onChange={(event) => {
+            handleInputChangeText(event);
+            handleInputChange(event);
+           
+          }}
+         
+          value={user?.title || ''}
+          
+        >
+          <option value="">Sélectionnez...</option>
+          <option value="Mme">Mme</option>
+          <option value="M.">M.</option>
+        </select>
+     
+      </div>
+      <div className="form-grp">
+        <label htmlFor="lastName">Nom</label>
+        <input
+          type="text"
+          id="lastName"
+          className="form-select"
+          name="lastName"
+          value={user?.lastName || ''}
+          onChange={handleInputChangeText}
+          required
+        />
+        {errors.lastName && <span className="error-message">{errors.lastName}</span>}
+      </div>
+      <div className="form-grp">
+        <label htmlFor="firstName">Prénom</label>
+        <input
+          type="text"
+          id="firstName"
+          className="form-select"
+          name="firstName"
+          placeholder="Prénom *"
+          value={user?.firstName || ''}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.firstName && <span className="error-message">{errors.firstName}</span>}
+      </div>
+      <div className="form-grp">
+        <label htmlFor="phone">Portable</label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          className="form-select"
+          placeholder="Portable *"
+          value={user?.telephone || ''}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.phone && <span className="error-message">{errors.phone}</span>}
+      </div>
+      <div className="form-grp">
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          className="form-select"
+          placeholder="Email *"
+          value={user?.email || ''}
+          onChange={handleInputChange}
+          required
+        />
+        {errors.email && <span className="error-message">{errors.email}</span>}
+      </div>
+      <div className="form-grp">
+        <label htmlFor="comments">Comments</label>
+        <textarea
+          id="comments"
+          name="comments"
+          className="form-select"
+          placeholder="Comments"
+          onChange={handleInputChange}
+        />
+      </div>
+      <button type="button" style={{ width: 'auto', marginBottom: '5px' }} onClick={handleNextStep}>
+        Next
+      </button>
     </div>
-    <div className="form-grp">
-      <label htmlFor="lastName">Nom</label>
-      <input type="text" id="lastName" className="form-select" name="lastName"  value={user && user.lastName} onChange={(event) =>{ handleInputChange(event);}} required />
-    </div>
-    <div className="form-grp">
-      <label htmlFor="firstName">Prénom</label>
-      <input type="text" id="firstName" className="form-select" name="firstName" placeholder="Prénom *" value={user && user.firstName} onChange={handleInputChange} required />
-    </div>
-    <div className="form-grp">
-      <label htmlFor="phone">Portable</label>
-      <input type="tel" id="phone" name="phone" className="form-select" placeholder="Portable *" value={user && user.telephone} onChange={handleInputChange} required />
-    </div>
-    <div className="form-grp">
-      <label htmlFor="email">Email</label>
-      <input type="email" id="email" name="email" className="form-select" placeholder="Email *" value={user && user.email} onChange={handleInputChange} required />
-    </div>
-    <div className="form-grp">
-      <label htmlFor="comments">Comments</label>
-      <textarea id="comments" name="comments" className="form-select" placeholder="Comments" onChange={handleInputChange} />
-    </div>
-    <button type="button" style={{width:'auto', marginBottom:'5px'}}  onClick={nextStep}>Next</button>
-  </div>
-  )
-  };
+  );
+};
 
 
-const Step2 = ({ education, handleEducationChange, addEducation, prevStep, nextStep }) => (
+
+const Step2 = ({ education, handleEducationChange, addEducation,goToStep  }) => (
   <div>
     <h3>Étape 2: Éducation</h3>
     {education.map((edu, index) => (
@@ -326,12 +458,12 @@ const Step2 = ({ education, handleEducationChange, addEducation, prevStep, nextS
       </div>
     ))}
     <button type="button" style={{width:'auto', marginRight:'5%'}}  onClick={addEducation}>Ajouter une autre éducation</button>
-    <button type="button" style={{width:'auto', marginRight:'5px'}}  onClick={prevStep}>précédent</button>
-    <button type="button" style={{width:'auto'}}  onClick={nextStep}>Suivant</button>
+    <button type="button" style={{width:'auto', marginRight:'5px'}}  onClick={() => goToStep(1)}>précédent</button>
+    <button type="button" style={{width:'auto'}}  onClick={() => goToStep(3)}>Suivant</button>
   </div>
 );
 
-const Step3 = ({ experience, handleExperienceChange, addExperience, prevStep, nextStep }) => (
+const Step3 = ({ experience, handleExperienceChange, addExperience, goToStep  }) => (
   <div>
     <h3>Étape 3: L'expérience professionnelle</h3>
     {experience.map((exp, index) => (
@@ -366,12 +498,12 @@ const Step3 = ({ experience, handleExperienceChange, addExperience, prevStep, ne
       </div>
     ))}
     <button type="button" style={{width:'auto', marginRight:'5%'}}  onClick={addExperience}>Ajouter une autre expérience</button>
-    <button type="button" style={{width:'auto', marginRight:'5px'}}  onClick={prevStep}>précédent</button>
-    <button type="button" style={{width:'auto'}}  onClick={nextStep}>Suivant</button>
+    <button type="button" style={{width:'auto', marginRight:'5px'}}  onClick={() => goToStep(2)}>précédent</button>
+    <button type="button" style={{width:'auto'}}  onClick={() => goToStep(4)}>Suivant</button>
   </div>
 );
 
-const Step4 = ({ handleFileChange ,handleFileChangeUpload}) => (
+const Step4 = ({ handleFileChange, handleFileChangeUpload, handleFileChangeWithValidation, isFileValid }) => (
   <div>
     <h3>Étape 4: Télécharger CV</h3>
     <div className="form-grp">
@@ -383,13 +515,20 @@ const Step4 = ({ handleFileChange ,handleFileChangeUpload}) => (
         accept=".pdf"
         onChange={(event) => {
           handleFileChange(event);
+          handleFileChangeWithValidation(event);
           handleFileChangeUpload(event);
         }}
-    
       />
-      
+
+      {!isFileValid && <span className="error-message" style={{ color: 'red', marginBottom: '10px' }}>Veuillez télécharger votre CV en fichier PDF valide.</span>}
     </div>
-    <button style={{width:'auto'}}  type="submit">Soumettre</button>
-    
+    <button
+      type="submit"
+      style={{ width: 'auto' }}
+      disabled={!isFileValid} 
+    >
+      Soumettre
+    </button>
   </div>
 );
+

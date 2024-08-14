@@ -17,6 +17,8 @@ import Testimonial from "@/components/sections/home5/Testimonial"
 import AboutThree from "@/components/sections/home5/AboutThree"
 import Estimate from "@/components/sections/home5/Estimate"
 import Testimonial2 from "@/components/sections/home5/Testimonial2"
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Home5() {
     return (
         <>
@@ -34,7 +36,7 @@ export default function Home5() {
                 <Testimonial2/>
                 <Contact />
                 <Blog />
-                
+                <ToastContainer/>
             </Layout>
         </>
     )
