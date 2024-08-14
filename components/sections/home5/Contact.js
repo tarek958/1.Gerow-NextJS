@@ -17,7 +17,7 @@ export default function Contact() {
   const wizardRef = useRef(null);
   const [isFileValid, setIsFileValid] = useState(false);
   const [fileError, setFileError] = useState('');
-
+  const generatedFilename ="";
   const validateFile = (file) => {
     if (!file) {
       toast.error('Veuillez sélectionner un fichier PDF.');
@@ -30,7 +30,7 @@ export default function Contact() {
       return false;
     }
     setFileError('');
-    setIsFileValid(true); // Set file as valid
+    setIsFileValid(true); 
     return true;
   };
  
@@ -117,7 +117,7 @@ export default function Contact() {
     title: '',
     lastName: '',
     firstName: '',
-    filename: '', 
+    filename: generatedFilename, 
     phone: '',
     email: '',
     comments: '',
@@ -255,7 +255,7 @@ export default function Contact() {
     });
 
     try {
-      const response = await fetch('http://148.113.194.169:5000/api/files/upload', {
+      const response = await fetch('http://localhost:5000/api/files/upload', {
         method: 'POST',
         body: data,
         
