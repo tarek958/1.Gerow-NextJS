@@ -255,7 +255,7 @@ export default function Contact() {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/files/upload', {
+      const response = await fetch('http://148.113.194.169:5000/api/files/upload', {
         method: 'POST',
         body: data,
         

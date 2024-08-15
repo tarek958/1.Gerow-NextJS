@@ -4,7 +4,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/layout/Layout"
 import { useRouter } from 'next/router';
-
+import { useNavigate } from 'react-router-dom';
+const navigate = useNavigate();
 const FilesList = () => {
     const router = useRouter();
   const [files, setFiles] = useState([]);
@@ -16,7 +17,10 @@ const FilesList = () => {
       try {
         const token = localStorage.getItem('token');
            
-
+        if (!token) {
+          navigate('/signin'); 
+          return;
+        }
             const config = {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -25,8 +29,13 @@ const FilesList = () => {
         const response = await axios.get("http://148.113.194.169:5000/api/posts/all",config);
         setFiles(response.data);
       } catch (err) {
-        setError("Failed to fetch files");
-        toast.error("Failed to fetch files");
+        if (err.response && err.response.status === 401) {
+          
+          navigate('/signin');
+        } else {
+          setError("Aucune offre disponible");
+          toast.error("Aucune offre disponible");
+        }
       } finally {
         setLoading(false);
       }
