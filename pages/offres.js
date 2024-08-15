@@ -4,7 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/layout/Layout"
 import { useRouter } from 'next/router';
-import { useNavigate } from 'react-router-dom';
+
 const navigate = useNavigate();
 const FilesList = () => {
     const router = useRouter();
@@ -18,7 +18,9 @@ const FilesList = () => {
         const token = localStorage.getItem('token');
            
         if (!token) {
-          navigate('/signin'); 
+          setTimeout(() => {
+            router.push('/signin'); 
+          }); 
           return;
         }
             const config = {
@@ -31,7 +33,9 @@ const FilesList = () => {
       } catch (err) {
         if (err.response && err.response.status === 401) {
           
-          navigate('/signin');
+          setTimeout(() => {
+            router.push('/signin'); 
+          }); 
         } else {
           setError("Aucune offre disponible");
           toast.error("Aucune offre disponible");
@@ -42,7 +46,7 @@ const FilesList = () => {
     };
 
     fetchFiles();
-  }, []);
+  }, [router]);
   
   if (loading) {
     return (
