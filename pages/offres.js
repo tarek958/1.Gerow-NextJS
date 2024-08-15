@@ -4,21 +4,21 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Layout from "@/components/layout/Layout"
 import { useRouter } from 'next/router';
-import { useNavigate } from 'react-router-dom';
+
 
 const FilesList = () => {
     const router = useRouter();
   const [files, setFiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
   useEffect(() => {
     const fetchFiles = async () => {
       try {
         const token = localStorage.getItem('token');
            
         if (!token) {
-          navigate('/signin'); 
+          router.push('/login');
           return;
         }
             const config = {
@@ -31,7 +31,7 @@ const FilesList = () => {
       } catch (err) {
         if (err.response && err.response.status === 401) {
           
-          navigate('/signin');
+          router.push('/login');
         } else {
           setError("Aucune offre disponible");
           toast.error("Aucune offre disponible");
@@ -42,7 +42,7 @@ const FilesList = () => {
     };
 
     fetchFiles();
-  }, [navigate]);
+  }, [router]);
   
   if (loading) {
     return (
