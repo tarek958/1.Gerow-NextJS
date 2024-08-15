@@ -20,12 +20,15 @@ export default function Estimate() {
         event.preventDefault();
         fetchPosts(activeIndex, searchKeyword);
     };
-
+  
     const fetchRegions = async () => {
         try {
             const res = await fetch('http://148.113.194.169:5000/api/postss/regions');
             const data = await res.json();
             setRegions(data);
+            if (data.length > 0) {
+                setActiveIndex(1);
+            }
         } catch (error) {
             console.error("Failed to fetch regions:", error);
         }
@@ -50,7 +53,7 @@ export default function Estimate() {
     useEffect(() => {
         fetchRegions();
     }, []);
-
+    
     useEffect(() => {
         if (regions.length > 0) {
             fetchPosts(activeIndex, searchKeyword);
@@ -58,7 +61,7 @@ export default function Estimate() {
     }, [activeIndex, currentPage, searchKeyword]);
 
     const scrollToContact = (company) => {
-        localStorage.setItem("selectedCompany", company); // Store company in local storage
+        localStorage.setItem("selectedCompany", company); 
         if (contactRef.current) {
             contactRef.current.scrollIntoView({ behavior: "smooth" });
         }
@@ -77,7 +80,7 @@ export default function Estimate() {
                         <Link href="/offres" className="btn btn-three">VOIR TOUTES NOS OFFRES</Link>
                     </div>
                     <div className="row align-items-center">
-                        <div className="col-lg-6">
+                        <div className="col-lg-8">
                             <div className="estimate-content">
                                 <div className="estimate-tab-wrap">
                                     <select className="form-select" value={activeIndex} onChange={(e) => handleOnClick(parseInt(e.target.value))}>
@@ -124,9 +127,9 @@ export default function Estimate() {
                                                                 {Array.isArray(posts) && posts.length > 0 ? (
                                                                     posts.map((post, postIndex) => (
                                                                         <tr key={postIndex}>
-                                                                            <td>{post.conditionsEtAvantages}</td>
-                                                                            <td>{post.descriptionDuPoste}</td>
-                                                                            <td>{post.presentationDeLEntreprise}</td>
+                                                                            <td>{post.conditionsEtAvantages.length > 15 ? post.conditionsEtAvantages.substring(0, 15) + '...' : post.conditionsEtAvantages}</td>
+                                                                            <td>{post.descriptionDuPoste.length > 15 ? post.descriptionDuPoste.substring(0, 15) + '...' : post.descriptionDuPoste}</td>
+                                                                            <td>{post.presentationDeLEntreprise.length > 15 ? post.presentationDeLEntreprise.substring(0, 15) + '...' : post.presentationDeLEntreprise}</td>
                                                                             <td>
                                                                                 <Link 
                                                                                     href={`/${post._id}`} 
@@ -151,7 +154,7 @@ export default function Estimate() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-6">
+                        <div className="col-lg-4">
                             <div className="estimate-img text-center">
                                 <img src="/assets/img/images/estimate_img.png" alt="" />
                             </div>
