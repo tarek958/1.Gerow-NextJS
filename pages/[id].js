@@ -98,6 +98,7 @@ export default function PostDetails() {
     
     onClick={() => {
         localStorage.setItem('selectedCompany', post.agence); 
+        localStorage.setItem('PostId',post.uuid);
         router.push('/index-5#candidature'); 
     }}
 >

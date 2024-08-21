@@ -2,15 +2,14 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 
 export default function Estimate() {
-    const [activeIndex, setActiveIndex] = useState(1);
+    const [activeIndex, setActiveIndex] = useState(0);
     const [regions, setRegions] = useState([]);
     const [posts, setPosts] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [searchKeyword, setSearchKeyword] = useState("");
-    const contactRef = useRef(null); // Ref for the contact section
-
+    const contactRef = useRef(null); 
     const handleOnClick = (index) => {
         setActiveIndex(index);
         fetchPosts(index, searchKeyword);
@@ -85,6 +84,7 @@ export default function Estimate() {
                                 <div className="estimate-tab-wrap">
                                     <select className="form-select" value={activeIndex} onChange={(e) => handleOnClick(parseInt(e.target.value))}>
                                         {regions.length > 0 ? (
+                                            
                                             regions.map((region, index) => (
                                                 <option key={index} value={index + 1}>
                                                     {region}

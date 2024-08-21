@@ -73,6 +73,7 @@ export default function Contact() {
     }
   };
   const company = localStorage.getItem('selectedCompany');
+  const PostId = localStorage.getItem('PostId');
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -121,6 +122,7 @@ export default function Contact() {
     phone: '',
     email: '',
     comments: '',
+    PostId:PostId,
     company: company,
     cvUpload: null,
     education: [{ degree: '', institution: '', year: '' }],

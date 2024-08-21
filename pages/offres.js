@@ -115,7 +115,7 @@ const FilesList = () => {
                   className="btn btn-primary"
                   onClick={() => {
                     localStorage.setItem('selectedCompany', file.agence);
-                    
+                    localStorage.setItem('PostId',file.uuid);
                     router.push('/index-5#candidature'); 
                   }}
                 >
