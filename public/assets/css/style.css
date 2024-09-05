@@ -646,7 +646,7 @@ label {
 }
 
 .navbar-wrap ul li a {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 500;
     text-transform: capitalize;
     color: var(--tg-secondary-color);
@@ -678,6 +678,7 @@ label {
 
 .main-menu .navigation li.menu-item-has-children .dropdown-btn {
     display: none;
+    
 }
 
 .header-action>ul {

@@ -417,7 +417,7 @@ const Step1 = ({ handleInputChange, handleNextStep, errors = {}, user, handleInp
         />
       </div>
       <button type="button" style={{ width: 'auto', marginBottom: '5px' }} onClick={handleNextStep}>
-        Next
+        Suivant
       </button>
     </div>
   );

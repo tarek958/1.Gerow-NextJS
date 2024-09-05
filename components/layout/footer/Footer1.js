@@ -69,7 +69,9 @@ export default function Footer1() {
                                             <Link href="/"><img src="/assets/img/logo/w_logo.png" alt="" /></Link>
                                         </div>
                                         <div className="copyright-text">
-                                            <p>Atlantis Conseil ©2021 | Tous droits réservés | Mentions légales & Confidentialité | par Sotupub</p>
+                                        <p>Atlantis Conseil ©2021 | Tous droits réservés |  <Link href="/mention-legales">
+      Mentions légales
+    </Link> | par Sotupub</p>
                                         </div>
                                     </div>
                                 </div>

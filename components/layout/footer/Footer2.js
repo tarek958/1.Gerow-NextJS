@@ -74,7 +74,9 @@ export default function Footer2() {
                             <div className="row">
                                 <div className="col-lg-12">
                                     <div className="copyright-text-two text-center">
-                                        <p>Atlantis Conseil ©2021 | Tous droits réservés | Mentions légales & Confidentialité | par Sotupub</p>
+                                    <p>Atlantis Conseil ©2021 | Tous droits réservés |  <Link href="/mention-legales">
+      Mentions légales
+    </Link> | par Sotupub</p>
                                     </div>
                                 </div>
                             </div>

@@ -16,8 +16,9 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, isSear
 
   return (
     <>
+    
       <header id="sticky-header" className={`transparent-header header-style-three ${scroll ? "sticky-menu" : ""}`}>
-        <div className="heder-top-wrap">
+        <div className="heder-top-wrap" style={{backgroundColor:"black"}}>
           <div className="container">
             <div className="row align-items-center">
               <div className="col-lg-7">
@@ -34,13 +35,19 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, isSear
                     <Link href="tel:0489977508"><i className="flaticon-phone-call" />04 89 97 75 08</Link>
                   </div>
                   <div className="header-social">
-                    <ul className="list-wrap">
-                      <li><Link href="#"><i className="fab fa-facebook-f" /></Link></li>
-                      <li><Link href="#"><i className="fab fa-twitter" /></Link></li>
-                      <li><Link href="#"><i className="fab fa-instagram" /></Link></li>
-                      <li><Link href="#"><i className="fab fa-pinterest-p" /></Link></li>
-                    </ul>
-                  </div>
+                                        {token ? (
+                                            <>
+                                                <Link href="/profile">
+                                                    <div className="btn-sm" style={{backgroundColor:"white",borderRadius:"20px",fontWeight:"bold",fontSize:"18px"}}>Espace client</div>
+                                                </Link>
+                                               
+                                            </>
+                                        ) : (
+                                            <Link href="/signin">
+                                                <div className="btn-sm" style={{backgroundColor:"white",borderRadius:"20px",fontWeight:"bold",fontSize:"18px"}}>Espace client</div>
+                                            </Link>
+                                        )}
+                                    </div>
                 </div>
               </div>
             </div>
@@ -60,7 +67,7 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, isSear
                     </div>
                     <div className="navbar-wrap main-menu d-none d-lg-flex">
                       <ul className="navigation">
-                        <li className={activeLink === '/' ? 'active' : ''}><Link href="/">Accueil</Link></li>
+                        <li  className={activeLink === '/' ? 'active' : ''}><Link href="/">Accueil</Link></li>
                         <li className={`menu-item-has-children ${activeLink === '/index-4' ? 'active' : ''}`}>
                           <Link href="/index-4" >Entreprises</Link>
                           <ul className="sub-menu">
@@ -85,36 +92,10 @@ export default function Header2({ scroll, isMobileMenu, handleMobileMenu, isSear
                         <li><Link href="/contact">Contact</Link></li>
                       </ul>
                     </div>
-                    <div className="navbar-wrap main-menu d-none d-lg-flex">
-                      <ul className="">
-                        <li className={`menu-item-has-children ${activeLink === '/index-5' ? 'active' : ''}`}>
-                          <Link href="/index-5"><i className="fas fa-user"></i></Link>
-                          <ul className="sub-menu2">
-                            <li className="menu-item-has-children">
-                              <li></li>
-                              <li><div className="">
-                                {token ? (
-                                  <>
-                                  <Link href="/profile">Profile</Link>
-                                  <Link href="/"
-                                    className=""
-                                    onClick={() => {
-                                      localStorage.removeItem('token');
-                                     
-                                    }}
-                                  >
-                                    Se déconnecter
-                                  </Link>
-                                  </>
-                                ) : (
-                                  <Link href="/signin">Se connecter
-                                  </Link>
-                                )}
-                              </div></li>
-                            </li>
-                          </ul>
-                        </li>
-                      </ul>
+                    <div className="navbar-wrap main-menu d-none d-lg-flex " style={{justifyContent:'flex-end'}}>
+                      <Link href="/index-5#offres">
+                        <div className="btn btn-three btn-sm">Offres d'emploi</div>
+                      </Link>
                     </div>
 
 
