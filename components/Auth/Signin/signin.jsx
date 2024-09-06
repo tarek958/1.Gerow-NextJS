@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import axios from 'axios';
-import { useRouter } from 'next/router'; 
-import { MDBContainer, MDBCol, MDBRow, MDBInput } from 'mdb-react-ui-kit';
+import { useRouter } from 'next/router';
+import { MDBContainer, MDBCol, MDBRow, MDBInput, MDBCard, MDBCardBody, MDBCardImage, MDBIcon } from 'mdb-react-ui-kit';
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; 
-import ForgotPasswordModal from './ForgotPasswordModal'; // Import the modal component
+import 'react-toastify/dist/ReactToastify.css';
+import ForgotPasswordModal from './ForgotPasswordModal';
 
 function Signin() {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  const [currentStep, setCurrentStep] = useState(1);
   const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
   const handleForgotPasswordClick = () => {
@@ -22,89 +23,147 @@ function Signin() {
     setShowForgotPasswordModal(false);
   };
 
+  const handleNextStep = () => {
+    if (currentStep === 1) {
+      if (!email) {
+        toast.error("L'email est requis.");
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        toast.error("Format d'email invalide.");
+        return;
+      }
+
+      setCurrentStep(2); // Move to the next step
+    }
+  };
+  const handlePreviousStep = () => {
+    setCurrentStep(currentStep - 1);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password) {
-      toast.error("L'email et le mot de passe sont requis.");
-      return;
-    }
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      toast.error("Format d'email invalide.");
-      return;
-    }
-
-    try {
-      const response = await axios.post("http://148.113.194.169:5000/api/users/signin", {
-        email,
-        password,
-      });
-
-      if (response.status === 200) {
-        toast.success('Connexion réussie');
-        localStorage.setItem('token', response.data.token); 
-        setTimeout(() => {
-          router.push('/');
-        }, 500);
+    if (currentStep === 2) {
+      if (!password) {
+        toast.error("Le mot de passe est requis.");
+        return;
       }
-    } catch (error) {
-      console.error('Échec :', error);
-      if (error.response && error.response.data && error.response.data.message) {
-        toast.error(error.response.data.message); 
-      } else {
-        toast.error('Échec de la connexion. Veuillez réessayer.');
+
+      try {
+        const response = await axios.post("http://148.113.194.169:5000/api/users/signin", {
+          email,
+          password,
+        });
+
+        if (response.status === 200) {
+          toast.success('Connexion réussie');
+          localStorage.setItem('token', response.data.token);
+          setTimeout(() => {
+            router.push('/');
+          }, 500);
+        }
+      } catch (error) {
+        console.error('Échec :', error);
+        if (error.response && error.response.data && error.response.data.message) {
+          toast.error(error.response.data.message);
+        } else {
+          toast.error('Échec de la connexion. Veuillez réessayer.');
+        }
       }
     }
   };
 
   return (
-    <MDBContainer fluid className="p-3 d-flex justify-content-center align-items-center signinContainer" style={{ height: '100vh' }}>
-      <MDBRow className='d-flex justify-content-center'>
-        <MDBCol col='8' md='6' className='d-flex justify-content-center signinImage'>
-          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg" className="img-fluid" alt="Image de téléphone" />
-        </MDBCol>
-        <MDBCol col='2' md='4'>
-          <MDBCol col='2' md='40' className="p-3 my-3 d-flex justify-content-center align-items-center signinForm">
-            <img src="https://www.atlantis-conseil.fr/j9Ch0H/uploads/2020/05/AtlantisConseil-Logo-V2-170-1.png" alt="Logo" className="img-fluid" style={{ maxWidth: '150px' }} />
+    <MDBContainer fluid className="d-flex justify-content-center align-items-center" style={{ height: '100vh' ,paddingTop:'5%'}}>
+      <MDBCard style={{ maxWidth: '900px', width: '100%', borderRadius: '15px' }}>
+        <MDBRow className="g-0">
+          <MDBCol md="5" className="d-none d-md-block">
+            <MDBCardImage
+              src="/assets/signup.png"
+              alt="Professional Image"
+              className="rounded-start"
+              style={{ height: '100%', objectFit: 'cover' }}
+            />
           </MDBCol>
+          <MDBCol md="7">
+            <MDBCardBody className="d-flex flex-column">
 
-          <form onSubmit={handleSubmit}>
-            <MDBInput
-              wrapperClass='mb-4'
-              label='Adresse email'
-              id='formControlLg'
-              type='email'
-              size="lg"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <MDBInput
-              wrapperClass='mb-4'
-              label='Mot de passe'
-              id='formControlLg'
-              type='password'
-              size="lg"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+              {/* Stepper */}
+              <div className="d-flex justify-content-between align-items-center mb-4">
+                <div className={`d-flex flex-column align-items-center ${currentStep === 1 ? 'text-primary' : 'text-muted'}`}>
+                  <MDBIcon fas icon="envelope" size="2x" />
+                  
+                  <div className="step-bar mt-2" style={{ width: '50px', height: '5px', backgroundColor: currentStep >= 1 ? '#1266f1' : '#e0e0e0' }}></div>
+                </div>
+                <div className={`d-flex flex-column align-items-center ${currentStep === 2 ? 'text-primary' : 'text-muted'}`}>
+                  <MDBIcon fas icon="lock" size="2x" />
+                  
+                  <div className="step-bar mt-2" style={{ width: '50px', height: '5px', backgroundColor: currentStep === 2 ? '#1266f1' : '#e0e0e0' }}></div>
+                </div>
+              </div>
 
-            {error && <div className="text-danger mb-3">{error}</div>}
+              <form onSubmit={handleSubmit}>
+                {currentStep === 1 && (
+                  <MDBInput
+                    wrapperClass='mb-4'
+                    label='Adresse email'
+                    id='formControlLg'
+                    type='email'
+                    size="lg"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                )}
 
-            <div className="d-flex justify-content-between mb-4">
-              <a href="#" onClick={handleForgotPasswordClick}>Mot de passe oublié ?</a>
-            </div>
+                {currentStep === 2 && (
+                  <MDBInput
+                    wrapperClass='mb-4'
+                    label='Mot de passe'
+                    id='formControlLg'
+                    type='password'
+                    size="lg"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                )}
 
-            <div className="btn-center">
-              <button className="btn btn-primary mb-4 w-20" type="submit">Se connecter</button>
-            </div>
-            <div className="text-center mt-4">
-              <p>Vous n'avez pas de compte ? <Link href="/signup">S'inscrire</Link></p>
-            </div>
-          </form>
-        </MDBCol>
-      </MDBRow>
+                {error && <div className="text-danger mb-3">{error}</div>}
+
+                <div >
+                  {currentStep === 1 && (
+                    <div className="d-flex justify-content-end">
+                    <button className="btn btn-primary w-20" type="button" onClick={handleNextStep}>
+                      Suivant
+                    </button>
+                  </div>
+                  
+                  )}
+                  {currentStep === 2 && (
+                    <div className='d-flex flex-column flex-md-row justify-content-between mb-4'>
+                      <div>
+                        <button className="btn btn-secondary w-100 mb-2 mb-md-0" type="button" onClick={handlePreviousStep}>
+                          Précédent
+                        </button>
+                      </div>
+                      <div>
+                        <button className="btn btn-primary w-100" type="submit">Se connecter</button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </form>
+              <div className="text-start mt-auto" style={{marginBottom:'5%'}}>
+                        <a href="#" onClick={handleForgotPasswordClick}>Mot de passe oublié ?</a>
+                      </div>
+              <div className="text-center mt-auto">
+                <p>Vous n'avez pas de compte ? <Link href="/signup">S'inscrire</Link></p>
+              </div>
+            </MDBCardBody>
+          </MDBCol>
+        </MDBRow>
+      </MDBCard>
       <ForgotPasswordModal show={showForgotPasswordModal} handleClose={handleCloseForgotPasswordModal} />
       <ToastContainer />
     </MDBContainer>
