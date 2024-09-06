@@ -76,7 +76,7 @@ export default function Footer2() {
                                     <div className="copyright-text-two text-center">
                                     <p>Atlantis Conseil ©2021 | Tous droits réservés |  <Link href="/mention-legales">
       Mentions légales
-    </Link> | par Sotupub</p>
+    </Link>  </p>
                                     </div>
                                 </div>
                             </div>
